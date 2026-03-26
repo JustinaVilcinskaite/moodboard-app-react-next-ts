@@ -1,7 +1,7 @@
 import { api } from "./axios";
 import { getAuthHeaders } from "../utils/auth";
 
-type SignUpProps = {
+type SignupProps = {
   name: string;
   email: string;
   password: string;
@@ -12,7 +12,7 @@ type LoginProps = {
   password: string;
 };
 
-export const signUp = async ({ name, email, password }: SignUpProps) => {
+export const signup = async ({ name, email, password }: SignupProps) => {
   const body = {
     name,
     email,

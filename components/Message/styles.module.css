@@ -1,0 +1,11 @@
+.error {
+  color: rgb(209, 79, 79);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.success {
+  color: rgb(68, 109, 68);
+  text-align: center;
+  margin-top: 0.5rem;
+}

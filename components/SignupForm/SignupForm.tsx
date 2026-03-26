@@ -1,46 +1,56 @@
 import styles from "./styles.module.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { login } from "@/api/user";
-import { setToken } from "@/utils/auth";
-import { validateLogin } from "@/validations/loginValidation";
+import { signup } from "@/api/user";
+import { validateSignup } from "@/validations/signupValidation";
 import Message from "../Message/Message";
 
-const LoginForm = () => {
+const SignupForm = () => {
   const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isError, setError] = useState(false);
 
-  const handleLogin = async () => {
-    const validationError = validateLogin({ email, password });
+  const handleSignup = async () => {
+    const validationError = validateSignup({ name, email, password });
     if (validationError) {
       setMessage(validationError);
       setError(true);
       return;
     }
+
     try {
-      const data = await login({ email, password });
-      setToken(data.token);
+      const data = await signup({ name, email, password });
+
       console.log(data);
       setError(false);
-      setMessage("Login successful! Redirecting...");
-
+      setMessage("Sign up successful! Redirecting...");
       setTimeout(() => {
-        router.push("/");
+        router.push("/login");
       }, 1000);
     } catch (error) {
-      console.log("Login error", error);
+      console.log("Sign up error", error);
       setError(true);
-      setMessage("Bad email or password");
+      setMessage("Error creating account");
     }
   };
 
   return (
     <div className={styles.main}>
       <div className={styles.form}>
-        <h1>Login to Moodboard</h1>
+        <h1>Create an Account</h1>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+            setMessage("");
+            setError(false);
+          }}
+        />
         <input
           type="email"
           placeholder="Email"
@@ -62,7 +72,7 @@ const LoginForm = () => {
           }}
         />
 
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={handleSignup}>Sign up</button>
 
         {message && <Message text={message} isError={isError} />}
       </div>
@@ -70,4 +80,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

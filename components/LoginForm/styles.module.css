@@ -28,11 +28,3 @@
   padding: 0.5rem;
 }
 
-.form button {
-  border: none;
-  padding: 0.8rem 1rem;
-  background-color: rgb(207, 207, 211);
-  width: 100px;
-  cursor: pointer;
-  align-self: center;
-}

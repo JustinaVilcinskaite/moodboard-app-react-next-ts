@@ -5,6 +5,7 @@ import { login } from "@/api/user";
 import { setToken } from "@/utils/auth";
 import { validateLogin } from "@/validations/loginValidation";
 import Message from "../Message/Message";
+import Button from "../Button/Button";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isError, setError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     const validationError = validateLogin({ email, password });
@@ -21,6 +23,7 @@ const LoginForm = () => {
       return;
     }
     try {
+      setLoading(true);
       const data = await login({ email, password });
       setToken(data.token);
       console.log(data);
@@ -34,6 +37,7 @@ const LoginForm = () => {
       console.log("Login error", error);
       setError(true);
       setMessage("Bad email or password");
+      setLoading(false);
     }
   };
 
@@ -62,7 +66,7 @@ const LoginForm = () => {
           }}
         />
 
-        <button onClick={handleLogin}>Login</button>
+        <Button title="Login" onClick={handleLogin} isLoading={isLoading} />
 
         {message && <Message text={message} isError={isError} />}
       </div>

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { signup } from "@/api/user";
 import { validateSignup } from "@/validations/signupValidation";
 import Message from "../Message/Message";
+import Button from "../Button/Button";
 
 const SignupForm = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const SignupForm = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isError, setError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const handleSignup = async () => {
     const validationError = validateSignup({ name, email, password });
@@ -22,6 +24,7 @@ const SignupForm = () => {
     }
 
     try {
+      setLoading(true);
       const data = await signup({ name, email, password });
 
       console.log(data);
@@ -34,6 +37,7 @@ const SignupForm = () => {
       console.log("Sign up error", error);
       setError(true);
       setMessage("Error creating account");
+      setLoading(false);
     }
   };
 
@@ -72,7 +76,7 @@ const SignupForm = () => {
           }}
         />
 
-        <button onClick={handleSignup}>Sign up</button>
+        <Button title="Sign up" onClick={handleSignup} isLoading={isLoading} />
 
         {message && <Message text={message} isError={isError} />}
       </div>

@@ -2,18 +2,23 @@ import styles from "./styles.module.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { signup } from "@/api/user";
+import { setToken } from "@/utils/auth";
 import { validateSignup } from "@/validations/signupValidation";
+import { useAuth } from "@/context/AuthContext";
+
 import Message from "../Message/Message";
 import Button from "../Button/Button";
 
 const SignupForm = () => {
   const router = useRouter();
+  const { validateUser } = useAuth();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isError, setError] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
 
   const handleSignup = async () => {
     const validationError = validateSignup({ name, email, password });
@@ -24,20 +29,25 @@ const SignupForm = () => {
     }
 
     try {
-      setLoading(true);
+      setSubmitting(true);
       const data = await signup({ name, email, password });
+      setToken(data.token);
+
+      await validateUser();
 
       console.log(data);
       setError(false);
       setMessage("Sign up successful! Redirecting...");
+      // TODO: later remove the setTimout and show message in /boards
       setTimeout(() => {
-        router.push("/login");
+        router.push("/");
       }, 1000);
     } catch (error) {
       console.log("Sign up error", error);
       setError(true);
       setMessage("Error creating account");
-      setLoading(false);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -76,7 +86,11 @@ const SignupForm = () => {
           }}
         />
 
-        <Button title="Sign up" onClick={handleSignup} isLoading={isLoading} />
+        <Button
+          title="Sign up"
+          onClick={handleSignup}
+          isLoading={isSubmitting}
+        />
 
         {message && <Message text={message} isError={isError} />}
       </div>

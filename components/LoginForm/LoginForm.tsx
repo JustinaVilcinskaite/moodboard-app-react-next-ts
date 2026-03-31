@@ -4,11 +4,14 @@ import { useRouter } from "next/router";
 import { login } from "@/api/user";
 import { setToken } from "@/utils/auth";
 import { validateLogin } from "@/validations/loginValidation";
+import { useAuth } from "@/context/AuthContext";
 import Message from "../Message/Message";
 import Button from "../Button/Button";
 
 const LoginForm = () => {
   const router = useRouter();
+  const { validateUser } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -26,10 +29,14 @@ const LoginForm = () => {
       setLoading(true);
       const data = await login({ email, password });
       setToken(data.token);
+
+      await validateUser();
+
       console.log(data);
       setError(false);
       setMessage("Login successful! Redirecting...");
 
+      // TODO: later remove the setTimout and show message in /boards
       setTimeout(() => {
         router.push("/");
       }, 1000);
@@ -37,6 +44,7 @@ const LoginForm = () => {
       console.log("Login error", error);
       setError(true);
       setMessage("Bad email or password");
+    } finally {
       setLoading(false);
     }
   };

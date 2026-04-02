@@ -5,13 +5,18 @@ type ButtonProps = {
   title: string;
   onClick: () => void;
   isLoading?: boolean;
+  variant?: "logout";
 };
 
-const Button = ({ title, onClick, isLoading = false }: ButtonProps) => {
+const Button = ({
+  title,
+  onClick,
+  isLoading = false,
+  variant,
+}: ButtonProps) => {
   return (
     <button
-      className={styles.main}
-      type="button"
+      className={`${styles.main} ${variant === "logout" && styles.logout}`}
       onClick={onClick}
       disabled={isLoading}
     >

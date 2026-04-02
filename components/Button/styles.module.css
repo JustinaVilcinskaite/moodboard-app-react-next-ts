@@ -12,3 +12,23 @@
   cursor: not-allowed;
 }
 
+.logout {
+  all: unset;
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.logout:hover {
+  background-color: #f7f7f7;
+}
+
+@media (max-width: 768px) {
+  .logout {
+    text-align: left;
+  }
+}

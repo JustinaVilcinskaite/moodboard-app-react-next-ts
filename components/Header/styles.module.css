@@ -1,3 +1,5 @@
+/* header with navbar */
+
 .header {
   position: relative;
   z-index: 20;
@@ -9,6 +11,7 @@
   background-color: #fff;
 }
 
+/* don't need */
 /* .leftSection {
   display: flex;
   align-items: center;
@@ -158,3 +161,62 @@
     text-align: left;
   }
 }
+
+/* seperate header */
+/* .header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #fff;
+}
+
+.logoTitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  width: 2rem;
+  display: block;
+}
+
+.websiteTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.burgerButton {
+  all: unset;
+  display: none;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.burgerButton img {
+  width: 100%;
+  display: block;
+}
+
+.overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .burgerButton {
+    display: block;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+} */

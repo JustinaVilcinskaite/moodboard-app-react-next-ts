@@ -1,7 +1,12 @@
+import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import LoginForm from "@/components/LoginForm/LoginForm";
 
 const LoginPage = () => {
-  return <LoginForm />;
+  return (
+    <PageTemplate>
+      <LoginForm />
+    </PageTemplate>
+  );
 };
 
 export default LoginPage;

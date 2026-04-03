@@ -1,10 +1,10 @@
-import Header from "@/components/Header/Header";
+import PageTemplate from "@/components/PageTemplate/PageTemplate";
 
 const MainPage = () => {
   return (
-    <div>
-      <Header />
-    </div>
+    <PageTemplate>
+      <h1>Landing Page</h1>
+    </PageTemplate>
   );
 };
 

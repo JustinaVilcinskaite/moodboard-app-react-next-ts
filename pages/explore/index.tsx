@@ -1,5 +1,11 @@
+import PageTemplate from "@/components/PageTemplate/PageTemplate";
+
 const ExplorePage = () => {
-  return <div>Explore page</div>;
+  return (
+    <PageTemplate>
+      <h1>Explore page</h1>
+    </PageTemplate>
+  );
 };
 
 export default ExplorePage;

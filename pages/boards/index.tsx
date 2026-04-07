@@ -1,22 +1,49 @@
-import { useAuth } from "@/context/AuthContext";
+import { useEffect, useState } from "react";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
-
+import { getMyBoards } from "@/api/board";
+import { Board } from "@/types/board";
+import BoardsWrapper from "@/components/BoardsWrapper/BoardsWrapper";
+import Message from "@/components/Message/Message";
 
 const BoardsPage = () => {
-  const { user } = useAuth();
+  const [boards, setBoards] = useState<Board[]>([]);
+  const [isLoading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+
+  const fetchBoards = async () => {
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const data = await getMyBoards();
+      setBoards(data.boards);
+    } catch (error) {
+      console.log("Failed to load boards", error);
+      setMessage("");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBoards();
+  }, []);
 
   return (
     <ProtectedRoute>
-       <PageTemplate>
-      <div>
-        <h1>{user?.name}'s Boards</h1>
-        <p>This page is only for logged-in users.</p>
-      </div>
-         </PageTemplate>
+      <PageTemplate>
+        <div>
+          <h1>My Boards</h1>
+        </div>
+        {message ? (
+          <Message text={message} isError={true} />
+        ) : (
+          <BoardsWrapper boards={boards} isLoading={isLoading} />
+        )}
+      </PageTemplate>
     </ProtectedRoute>
   );
 };
 
 export default BoardsPage;
-

@@ -38,7 +38,7 @@ const LoginForm = () => {
 
       // TODO: later remove the setTimout and show message in /boards
       setTimeout(() => {
-        router.push("/");
+        router.push("/boards");
       }, 1000);
     } catch (error) {
       console.log("Login error", error);

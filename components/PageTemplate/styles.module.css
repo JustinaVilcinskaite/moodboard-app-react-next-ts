@@ -6,4 +6,22 @@
 
 .main {
   flex: 1;
+  padding: 2rem 0 3rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
 }

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
 import arrowIcon from "@/assets/arrow-icon.svg";
 import Button from "../Button/Button";
+import { getUserInitial } from "@/utils/getUserInitial";
 
 type NavBarProps = {
   isMenuOpen: boolean;
@@ -25,11 +26,6 @@ const NavBar = ({
 
   const hiddenAuthPaths = ["/login", "/signup"];
   const shouldHideAuthLinks = hiddenAuthPaths.includes(router.pathname);
-
-  const getUserInitials = () => {
-    if (!user?.name) return "";
-    return user.name.trim().slice(0, 2).toUpperCase();
-  };
 
   const handleLogout = () => {
     logout();
@@ -65,7 +61,7 @@ const NavBar = ({
         </ul>
       </nav>
 
-      {!isLoading && isAuthenticated && (
+      {!isLoading && isAuthenticated && user &&(
         <div className={styles.userMenuWrapper}>
           <button
             type="button"
@@ -73,7 +69,7 @@ const NavBar = ({
             onClick={toggleUserMenu}
             aria-label="Toggle user menu"
           >
-            {getUserInitials()}
+            {getUserInitial(user.name)}
             <img src={arrowIcon.src} alt="Open user menu" />
           </button>
 

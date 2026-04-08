@@ -5,6 +5,7 @@ import { getMyBoards } from "@/api/board";
 import { Board } from "@/types/board";
 import BoardsWrapper from "@/components/BoardsWrapper/BoardsWrapper";
 import Message from "@/components/Message/Message";
+import styles from "./styles.module.css";
 
 const BoardsPage = () => {
   const [boards, setBoards] = useState<Board[]>([]);
@@ -20,7 +21,7 @@ const BoardsPage = () => {
       setBoards(data.boards);
     } catch (error) {
       console.log("Failed to load boards", error);
-      setMessage("");
+      setMessage("Failed to load boards.");
     } finally {
       setLoading(false);
     }
@@ -33,14 +34,14 @@ const BoardsPage = () => {
   return (
     <ProtectedRoute>
       <PageTemplate>
-        <div>
-          <h1>My Boards</h1>
-        </div>
-        {message ? (
-          <Message text={message} isError={true} />
-        ) : (
-          <BoardsWrapper boards={boards} isLoading={isLoading} />
-        )}
+        <section className={styles.pageSection}>
+          <h1 className={styles.title}>My Boards</h1>
+          {message ? (
+            <Message text={message} isError={true} />
+          ) : (
+            <BoardsWrapper boards={boards} isLoading={isLoading} />
+          )}
+        </section>
       </PageTemplate>
     </ProtectedRoute>
   );

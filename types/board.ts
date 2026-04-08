@@ -7,6 +7,8 @@ export type Board = {
   defaultFolderId: string;
   createdAt: string;
   updatedAt: string;
+  thumbnailUrl: string;
+  imageCount: number;
 };
 
 export type PublicBoard = {
@@ -15,4 +17,5 @@ export type PublicBoard = {
   description: string;
   createdAt: string;
   updatedAt: string;
+  thumbnailUrl: string;
 };

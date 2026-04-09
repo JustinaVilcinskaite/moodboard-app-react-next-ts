@@ -1,21 +1,14 @@
 export type Board = {
   id: string;
-  ownerId: string;
+  ownerId?: string;
   title: string;
-  description: string;
-  isPublic: boolean;
-  defaultFolderId: string;
+  description?: string;
+  isPublic?: boolean;
+  defaultFolderId?: string;
   createdAt: string;
   updatedAt: string;
-  thumbnailUrl: string;
-  imageCount: number;
+  thumbnailUrl?: string;
+  imageCount?: number;
 };
 
-export type PublicBoard = {
-  id: string;
-  title: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-  thumbnailUrl: string;
-};
+export type BoardCardVariant = "my-boards" | "explore";

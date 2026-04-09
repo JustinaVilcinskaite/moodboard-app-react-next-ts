@@ -39,7 +39,13 @@ const BoardsPage = () => {
           {message ? (
             <Message text={message} isError={true} />
           ) : (
-            <BoardsWrapper boards={boards} isLoading={isLoading} />
+            <BoardsWrapper
+              boards={boards}
+              isLoading={isLoading}
+              emptyTitle="No boards yet..."
+              emptyText="Create your first board to get started."
+              cardVariant="my-boards"
+            />
           )}
         </section>
       </PageTemplate>

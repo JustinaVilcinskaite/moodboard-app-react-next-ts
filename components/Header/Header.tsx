@@ -31,31 +31,33 @@ const Header = () => {
       {isMenuOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
 
       <header className={styles.header}>
-        <Link href="/" className={styles.logoTitleWrapper}>
-          <img
-            src={moodboardLogo.src}
-            alt="Moodboard logo"
-            className={styles.logo}
+        <div className={styles.container}>
+          <Link href="/" className={styles.logoTitleWrapper}>
+            <img
+              src={moodboardLogo.src}
+              alt="Moodboard logo"
+              className={styles.logo}
+            />
+            <span className={styles.websiteTitle}>Moodboard</span>
+          </Link>
+
+          <button
+            type="button"
+            className={styles.burgerButton}
+            onClick={toggleMenu}
+            aria-label="Toggle navigation menu"
+          >
+            <img src={burgerButton.src} alt="Menu" />
+          </button>
+
+          <NavBar
+            isMenuOpen={isMenuOpen}
+            isUserMenuOpen={isUserMenuOpen}
+            closeMenu={closeMenu}
+            toggleUserMenu={toggleUserMenu}
+            closeUserMenu={closeUserMenu}
           />
-          <span className={styles.websiteTitle}>Moodboard</span>
-        </Link>
-
-        <button
-          type="button"
-          className={styles.burgerButton}
-          onClick={toggleMenu}
-          aria-label="Toggle navigation menu"
-        >
-          <img src={burgerButton.src} alt="Menu" />
-        </button>
-
-        <NavBar
-          isMenuOpen={isMenuOpen}
-          isUserMenuOpen={isUserMenuOpen}
-          closeMenu={closeMenu}
-          toggleUserMenu={toggleUserMenu}
-          closeUserMenu={closeUserMenu}
-        />
+        </div>
       </header>
     </>
   );

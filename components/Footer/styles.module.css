@@ -1,7 +1,28 @@
 .footer {
+  width: 100%;
   padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 100%;
 }
+
+/* .footer {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+} */

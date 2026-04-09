@@ -1,6 +1,6 @@
 /* header with navbar */
 
-.header {
+/* .header {
   position: relative;
   z-index: 20;
   display: flex;
@@ -9,6 +9,23 @@
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #e5e5e5;
   background-color: #fff;
+} */
+
+.header {
+  position: relative;
+  z-index: 20;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #fff;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* don't need */
@@ -107,6 +124,10 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
   .burgerButton {
     display: block;
   }
@@ -162,7 +183,7 @@
   }
 }
 
-/* seperate header */
+/* separate header  */
 /* .header {
   position: relative;
   z-index: 20;

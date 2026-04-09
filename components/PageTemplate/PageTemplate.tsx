@@ -20,3 +20,4 @@ const PageTemplate = ({ children }: PageTemplateProps) => {
 };
 
 export default PageTemplate;
+

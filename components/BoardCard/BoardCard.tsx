@@ -41,14 +41,3 @@ const BoardCard = ({ board, variant }: BoardCardProps) => {
 export default BoardCard;
 
 
-  // {board.imageCount ?? 0} {(board.imageCount ?? 0) === 1 ? "image" : "images"}
-
-// {isMyBoards && (
-//   <div className={styles.info}>
-//     <p>
-//       {board.imageCount ?? 0} {(board.imageCount ?? 0) === 1 ? "image" : "images"}
-//     </p>
-//     <p>Updated {formatRelativeDate(board.updatedAt)}</p>
-//     <p>{board.isPublic ? "Public" : "Private"}</p>
-//   </div>
-// )}

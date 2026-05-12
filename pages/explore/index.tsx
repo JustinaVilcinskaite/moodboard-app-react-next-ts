@@ -39,9 +39,9 @@ const ExplorePage = () => {
           <BoardsWrapper
             boards={publicBoards}
             isLoading={isLoading}
-            emptyTitle="No public boards yet..."
-            emptyText="Check back later to explore shared boards."
-            cardVariant="explore"
+            emptyStateTitle="No public boards yet..."
+            emptyStateText="Check back later to explore shared boards."
+            variant="explore"
           />
         )}
       </section>

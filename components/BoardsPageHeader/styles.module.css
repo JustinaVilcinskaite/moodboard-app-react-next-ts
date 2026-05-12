@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.actionsRow {
+  display: flex;
+  justify-content: flex-start;
+}
+

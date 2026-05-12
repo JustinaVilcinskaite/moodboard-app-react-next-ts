@@ -5,12 +5,14 @@ import { getMyBoards } from "@/api/board";
 import { Board } from "@/types/board";
 import BoardsWrapper from "@/components/BoardsWrapper/BoardsWrapper";
 import Message from "@/components/Message/Message";
+import BoardsPageHeader from "@/components/BoardsPageHeader/BoardsPageHeader";
 import styles from "./styles.module.css";
 
 const BoardsPage = () => {
   const [boards, setBoards] = useState<Board[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
   const fetchBoards = async () => {
     setLoading(true);
@@ -27,6 +29,14 @@ const BoardsPage = () => {
     }
   };
 
+  const openCreateModal = () => {
+    setCreateModalOpen(true);
+  };
+
+  const closeCreateModal = () => {
+    setCreateModalOpen(false);
+  };
+
   useEffect(() => {
     fetchBoards();
   }, []);
@@ -35,18 +45,20 @@ const BoardsPage = () => {
     <ProtectedRoute>
       <PageTemplate>
         <section className={styles.pageSection}>
-          <h1 className={styles.title}>My Boards</h1>
+          <BoardsPageHeader onCreateClick={openCreateModal} />
+
           {message ? (
             <Message text={message} isError={true} />
           ) : (
             <BoardsWrapper
               boards={boards}
               isLoading={isLoading}
-              emptyTitle="No boards yet..."
-              emptyText="Create your first board to get started."
-              cardVariant="my-boards"
+              emptyStateTitle="No boards yet..."
+              emptyStateText="Create your first board to get started."
+              variant="my-boards"
             />
           )}
+          {isCreateModalOpen && <div>Create board modal will go here</div>}
         </section>
       </PageTemplate>
     </ProtectedRoute>

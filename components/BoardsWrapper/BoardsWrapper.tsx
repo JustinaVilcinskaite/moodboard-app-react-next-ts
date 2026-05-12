@@ -5,17 +5,17 @@ import { Board, BoardCardVariant } from "@/types/board";
 type BoardsWrapperProps = {
   boards: Board[];
   isLoading: boolean;
-  emptyTitle: string;
-  emptyText: string;
-  cardVariant: BoardCardVariant;
+  emptyStateTitle: string;
+  emptyStateText: string;
+  variant: BoardCardVariant;
 };
 
 const BoardsWrapper = ({
   boards,
   isLoading,
-  emptyTitle,
-  emptyText,
-  cardVariant,
+  emptyStateTitle,
+  emptyStateText,
+  variant,
 }: BoardsWrapperProps) => {
   return (
     <div className={styles.wrapper}>
@@ -23,12 +23,12 @@ const BoardsWrapper = ({
         <p>Loading...</p>
       ) : boards.length ? (
         boards.map((board) => (
-          <BoardCard key={board.id} board={board} variant={cardVariant} />
+          <BoardCard key={board.id} board={board} variant={variant} />
         ))
       ) : (
         <div className={styles.emptyState}>
-          <h2>{emptyTitle}</h2>
-          <p>{emptyText}</p>
+          <h2>{emptyStateTitle}</h2>
+          <p>{emptyStateText}</p>
         </div>
       )}
     </div>

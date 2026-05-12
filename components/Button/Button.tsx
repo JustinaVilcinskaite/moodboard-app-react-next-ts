@@ -5,7 +5,7 @@ type ButtonProps = {
   title: string;
   onClick: () => void;
   isLoading?: boolean;
-  variant?: "logout";
+  variant?: "primary" | "logout";
 };
 
 const Button = ({
@@ -16,7 +16,11 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`${styles.main} ${variant === "logout" && styles.logout}`}
+      className={`
+        ${styles.button}
+        ${variant === "primary" && styles.primary}
+        ${variant === "logout" && styles.logout}
+      `}
       onClick={onClick}
       disabled={isLoading}
     >

@@ -16,7 +16,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isError, setError] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
 
   const handleLogin = async () => {
     const validationError = validateLogin({ email, password });
@@ -26,7 +26,7 @@ const LoginForm = () => {
       return;
     }
     try {
-      setLoading(true);
+      setSubmitting(true);
       const data = await login({ email, password });
       setToken(data.token);
 
@@ -45,7 +45,7 @@ const LoginForm = () => {
       setError(true);
       setMessage("Bad email or password");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
@@ -74,7 +74,7 @@ const LoginForm = () => {
           }}
         />
 
-        <Button title="Login" onClick={handleLogin} isLoading={isLoading} />
+        <Button title="Login" onClick={handleLogin} isLoading={isSubmitting} />
 
         {message && <Message text={message} isError={isError} />}
       </div>

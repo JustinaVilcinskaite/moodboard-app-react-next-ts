@@ -6,6 +6,7 @@ import { Board } from "@/types/board";
 import BoardsWrapper from "@/components/BoardsWrapper/BoardsWrapper";
 import Message from "@/components/Message/Message";
 import BoardsPageHeader from "@/components/BoardsPageHeader/BoardsPageHeader";
+import CreateBoardModal from "@/components/CreateBoardModal/CreateBoardModal";
 import styles from "./styles.module.css";
 
 const BoardsPage = () => {
@@ -58,7 +59,12 @@ const BoardsPage = () => {
               variant="my-boards"
             />
           )}
-          {isCreateModalOpen && <div>Create board modal will go here</div>}
+          {isCreateModalOpen && (
+            <CreateBoardModal
+              onClose={closeCreateModal}
+              onBoardCreated={fetchBoards}
+            />
+          )}
         </section>
       </PageTemplate>
     </ProtectedRoute>

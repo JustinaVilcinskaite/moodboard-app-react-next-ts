@@ -13,8 +13,7 @@
 
 .primary {
   background-color: #fff;
-   border: 1px solid rgb(94, 93, 93);
-
+  border: 1px solid rgb(94, 93, 93);
 }
 
 .primary:hover {
@@ -33,6 +32,18 @@
 
 .logout:hover {
   background-color: #f7f7f7;
+}
+
+.secondary {
+  background: transparent;
+  border: none;
+}
+
+.icon {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 1.5rem;
 }
 
 @media (max-width: 768px) {

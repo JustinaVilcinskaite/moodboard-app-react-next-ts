@@ -6,6 +6,7 @@ import { formatRelativeDate } from "@/utils/formatRelativeDate";
 type BoardCardProps = {
   board: Board;
   variant: BoardCardVariant;
+  
 };
 
 const BoardCard = ({ board, variant }: BoardCardProps) => {

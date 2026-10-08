@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 type BoardsPageHeaderProps = {
   onCreateClick: () => void;
 };
+
 const BoardsPageHeader = ({ onCreateClick }: BoardsPageHeaderProps) => {
   return (
     <div className={styles.header}>

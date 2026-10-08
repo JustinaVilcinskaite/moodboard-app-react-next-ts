@@ -4,7 +4,7 @@ type LoginValidationParams = {
 };
 
 export const validateLogin = ({ email, password }: LoginValidationParams) => {
-  if (!email || !password) {
+  if (!email.trim() || !password) {
     return "All fields are required.";
   }
 

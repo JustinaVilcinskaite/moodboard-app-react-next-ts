@@ -2,11 +2,11 @@ import styles from "./styles.module.css";
 import { Board, BoardCardVariant } from "@/types/board";
 import Link from "next/link";
 import { formatRelativeDate } from "@/utils/formatRelativeDate";
+import BoardActionsMenu from "../BoardActionsMenu/BoardActionsMenu";
 
 type BoardCardProps = {
   board: Board;
   variant: BoardCardVariant;
-  
 };
 
 const BoardCard = ({ board, variant }: BoardCardProps) => {
@@ -35,10 +35,9 @@ const BoardCard = ({ board, variant }: BoardCardProps) => {
           )}
         </div>
       </Link>
+      {isMyBoards && <BoardActionsMenu board={board} />}
     </article>
   );
 };
 
 export default BoardCard;
-
-

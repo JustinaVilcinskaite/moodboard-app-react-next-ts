@@ -6,7 +6,7 @@ type ButtonProps = {
   title?: string;
   onClick: () => void;
   isLoading?: boolean;
-  variant?: "primary" | "secondary" | "logout" | "icon";
+  variant?: "primary" | "secondary" | "logout" | "icon" | "menu";
   icon?: ReactNode;
   ariaLabel?: string;
 };
@@ -27,6 +27,7 @@ const Button = ({
         ${variant === "secondary" && styles.secondary}
         ${variant === "logout" && styles.logout}
         ${variant === "icon" && styles.icon}
+        ${variant === "menu" && styles.menu}
 
       `}
       onClick={onClick}

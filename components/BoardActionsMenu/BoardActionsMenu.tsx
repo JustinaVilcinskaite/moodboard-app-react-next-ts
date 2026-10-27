@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { Board } from "@/types/board";
+import { updateBoardById } from "@/api/board";
 import Button from "../Button/Button";
 import RenameBoardModal from "../RenameBoardModal/RenameBoardModal";
 import DeleteBoardModal from "../DeleteBoardModal/DeleteBoardModal";
@@ -37,8 +38,17 @@ const BoardActionsMenu = ({ board, onBoardUpdated }: BoardActionsMenuProps) => {
     setDeleteModalOpen(false);
   };
 
-  const handleVisibilityChange = () => {
-    // TODO: add board visibility logic
+  const handleVisibilityChange = async () => {
+    try {
+      await updateBoardById(board.id, {
+        isPublic: !board.isPublic,
+      });
+
+      setMenuOpen(false);
+      await onBoardUpdated();
+    } catch (error) {
+      console.log("Update board visibility error", error);
+    }
   };
 
   return (

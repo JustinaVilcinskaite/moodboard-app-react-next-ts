@@ -8,6 +8,7 @@ type BoardsWrapperProps = {
   emptyStateTitle: string;
   emptyStateText: string;
   variant: BoardCardVariant;
+  onBoardUpdated?: () => Promise<void>;
 };
 
 const BoardsWrapper = ({
@@ -16,6 +17,7 @@ const BoardsWrapper = ({
   emptyStateTitle,
   emptyStateText,
   variant,
+  onBoardUpdated,
 }: BoardsWrapperProps) => {
   return (
     <div className={styles.wrapper}>
@@ -23,7 +25,12 @@ const BoardsWrapper = ({
         <p>Loading...</p>
       ) : boards.length ? (
         boards.map((board) => (
-          <BoardCard key={board.id} board={board} variant={variant} />
+          <BoardCard
+            key={board.id}
+            board={board}
+            variant={variant}
+            onBoardUpdated={onBoardUpdated}
+          />
         ))
       ) : (
         <div className={styles.emptyState}>

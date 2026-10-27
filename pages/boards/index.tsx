@@ -15,6 +15,7 @@ const BoardsPage = () => {
   const [message, setMessage] = useState("");
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
+  // TODO: avoid showing the full loading state when refetching after board actions
   const fetchBoards = async () => {
     setLoading(true);
     setMessage("");
@@ -57,6 +58,7 @@ const BoardsPage = () => {
               emptyStateTitle="No boards yet..."
               emptyStateText="Create your first board to get started."
               variant="my-boards"
+              onBoardUpdated={fetchBoards}
             />
           )}
           {isCreateModalOpen && (

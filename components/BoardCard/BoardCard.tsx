@@ -7,9 +7,10 @@ import BoardActionsMenu from "../BoardActionsMenu/BoardActionsMenu";
 type BoardCardProps = {
   board: Board;
   variant: BoardCardVariant;
+  onBoardUpdated?: () => Promise<void>;
 };
 
-const BoardCard = ({ board, variant }: BoardCardProps) => {
+const BoardCard = ({ board, variant, onBoardUpdated }: BoardCardProps) => {
   const isMyBoards = variant === "my-boards";
 
   return (
@@ -35,7 +36,9 @@ const BoardCard = ({ board, variant }: BoardCardProps) => {
           )}
         </div>
       </Link>
-      {isMyBoards && <BoardActionsMenu board={board} />}
+      {isMyBoards && onBoardUpdated &&  (
+        <BoardActionsMenu board={board} onBoardUpdated={onBoardUpdated} />
+      )}
     </article>
   );
 };

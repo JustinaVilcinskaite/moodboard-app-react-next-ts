@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { Board } from "@/types/board";
 import Button from "../Button/Button";
 import RenameBoardModal from "../RenameBoardModal/RenameBoardModal";
+import DeleteBoardModal from "../DeleteBoardModal/DeleteBoardModal";
 
 type BoardActionsMenuProps = {
   board: Board;
@@ -12,6 +13,7 @@ type BoardActionsMenuProps = {
 const BoardActionsMenu = ({ board, onBoardUpdated }: BoardActionsMenuProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isRenameModalOpen, setRenameModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -26,9 +28,13 @@ const BoardActionsMenu = ({ board, onBoardUpdated }: BoardActionsMenuProps) => {
     setRenameModalOpen(false);
   };
 
+  const openDeleteModal = () => {
+    setDeleteModalOpen(true);
+    setMenuOpen(false);
+  };
 
-  const handleDelete = () => {
-    // TODO: add delete board logic
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
   };
 
   const handleVisibilityChange = () => {
@@ -50,7 +56,7 @@ const BoardActionsMenu = ({ board, onBoardUpdated }: BoardActionsMenuProps) => {
           <div className={styles.menu}>
             <Button title="Rename" onClick={openRenameModal} variant="menu" />
 
-            <Button title="Delete" onClick={handleDelete} variant="menu" />
+            <Button title="Delete" onClick={openDeleteModal} variant="menu" />
 
             <Button
               title={board.isPublic ? "Make private" : "Make public"}
@@ -65,6 +71,13 @@ const BoardActionsMenu = ({ board, onBoardUpdated }: BoardActionsMenuProps) => {
         <RenameBoardModal
           board={board}
           onClose={closeRenameModal}
+          onBoardUpdated={onBoardUpdated}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteBoardModal
+          board={board}
+          onClose={closeDeleteModal}
           onBoardUpdated={onBoardUpdated}
         />
       )}

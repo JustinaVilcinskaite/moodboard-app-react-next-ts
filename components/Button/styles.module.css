@@ -55,6 +55,10 @@
   justify-content: flex-start;
 }
 
+.danger {
+  background-color: rgb(252, 209, 209);
+}
+
 @media (max-width: 768px) {
   .logout {
     text-align: left;

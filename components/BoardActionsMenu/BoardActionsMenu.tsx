@@ -10,24 +10,27 @@ type BoardActionsMenuProps = {
   board: Board;
   onBoardUpdated: () => Promise<void>;
   onBoardVisibilityChange: (boardId: string, isPublic: boolean) => void;
+  isMenuOpen: boolean;
+  onToggleMenu: () => void;
+  onCloseMenu: () => void;
 };
 
 const BoardActionsMenu = ({
   board,
   onBoardUpdated,
   onBoardVisibilityChange,
+  isMenuOpen,
+  onToggleMenu,
+  onCloseMenu,
 }: BoardActionsMenuProps) => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
   const [isRenameModalOpen, setRenameModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
-  };
+  
 
   const openRenameModal = () => {
     setRenameModalOpen(true);
-    setMenuOpen(false);
+    onCloseMenu();
   };
 
   const closeRenameModal = () => {
@@ -36,7 +39,7 @@ const BoardActionsMenu = ({
 
   const openDeleteModal = () => {
     setDeleteModalOpen(true);
-    setMenuOpen(false);
+    onCloseMenu();
   };
 
   const closeDeleteModal = () => {
@@ -52,11 +55,13 @@ const BoardActionsMenu = ({
 
       onBoardVisibilityChange(board.id, newVisibility);
 
-      setMenuOpen(false);
+      onCloseMenu();
     } catch (error) {
       console.log("Update board visibility error", error);
     }
   };
+
+  // TODO: close the board actions menu when clicking outside of it
 
   return (
     <>
@@ -64,7 +69,7 @@ const BoardActionsMenu = ({
         <Button
           // TODO: add an svg icon
           icon="•••"
-          onClick={toggleMenu}
+          onClick={onToggleMenu}
           variant="icon"
           ariaLabel="Board options"
         />

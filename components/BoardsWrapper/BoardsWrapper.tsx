@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./styles.module.css";
 import BoardCard from "../BoardCard/BoardCard";
 import { Board, BoardCardVariant } from "@/types/board";
@@ -21,6 +22,8 @@ const BoardsWrapper = ({
   onBoardUpdated,
   onBoardVisibilityChange,
 }: BoardsWrapperProps) => {
+  const [openMenuBoardId, setOpenMenuBoardId] = useState<string | null>(null);
+
   return (
     <div className={styles.wrapper}>
       {isLoading ? (
@@ -33,6 +36,13 @@ const BoardsWrapper = ({
             variant={variant}
             onBoardUpdated={onBoardUpdated}
             onBoardVisibilityChange={onBoardVisibilityChange}
+            isMenuOpen={openMenuBoardId === board.id}
+            onToggleMenu={() =>
+              setOpenMenuBoardId((prevId) =>
+                prevId === board.id ? null : board.id,
+              )
+            }
+            onCloseMenu={() => setOpenMenuBoardId(null)}
           />
         ))
       ) : (

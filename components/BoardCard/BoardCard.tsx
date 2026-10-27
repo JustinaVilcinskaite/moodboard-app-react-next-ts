@@ -9,6 +9,9 @@ type BoardCardProps = {
   variant: BoardCardVariant;
   onBoardUpdated?: () => Promise<void>;
   onBoardVisibilityChange?: (boardId: string, isPublic: boolean) => void;
+  isMenuOpen: boolean;
+  onToggleMenu: () => void;
+  onCloseMenu: () => void;
 };
 
 const BoardCard = ({
@@ -16,6 +19,9 @@ const BoardCard = ({
   variant,
   onBoardUpdated,
   onBoardVisibilityChange,
+  isMenuOpen,
+  onToggleMenu,
+  onCloseMenu,
 }: BoardCardProps) => {
   const isMyBoards = variant === "my-boards";
 
@@ -47,6 +53,9 @@ const BoardCard = ({
           board={board}
           onBoardUpdated={onBoardUpdated}
           onBoardVisibilityChange={onBoardVisibilityChange}
+          isMenuOpen={isMenuOpen}
+          onToggleMenu={onToggleMenu}
+          onCloseMenu={onCloseMenu}
         />
       )}
     </article>

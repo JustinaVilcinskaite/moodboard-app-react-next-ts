@@ -61,11 +61,7 @@ const DeleteBoardModal = ({
           {message && <Message text={message} isError={isError} />}
 
           <div className={styles.actions}>
-            <Button
-              title="Cancel"
-              onClick={onClose}
-              variant="secondary"
-            />
+            <Button title="Cancel" onClick={onClose} variant="secondary" />
 
             <Button
               title="Delete"

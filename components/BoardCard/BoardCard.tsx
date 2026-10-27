@@ -8,9 +8,15 @@ type BoardCardProps = {
   board: Board;
   variant: BoardCardVariant;
   onBoardUpdated?: () => Promise<void>;
+  onBoardVisibilityChange?: (boardId: string, isPublic: boolean) => void;
 };
 
-const BoardCard = ({ board, variant, onBoardUpdated }: BoardCardProps) => {
+const BoardCard = ({
+  board,
+  variant,
+  onBoardUpdated,
+  onBoardVisibilityChange,
+}: BoardCardProps) => {
   const isMyBoards = variant === "my-boards";
 
   return (
@@ -36,8 +42,12 @@ const BoardCard = ({ board, variant, onBoardUpdated }: BoardCardProps) => {
           )}
         </div>
       </Link>
-      {isMyBoards && onBoardUpdated &&  (
-        <BoardActionsMenu board={board} onBoardUpdated={onBoardUpdated} />
+      {isMyBoards && onBoardUpdated && onBoardVisibilityChange && (
+        <BoardActionsMenu
+          board={board}
+          onBoardUpdated={onBoardUpdated}
+          onBoardVisibilityChange={onBoardVisibilityChange}
+        />
       )}
     </article>
   );

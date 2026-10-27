@@ -9,9 +9,14 @@ import DeleteBoardModal from "../DeleteBoardModal/DeleteBoardModal";
 type BoardActionsMenuProps = {
   board: Board;
   onBoardUpdated: () => Promise<void>;
+  onBoardVisibilityChange: (boardId: string, isPublic: boolean) => void;
 };
 
-const BoardActionsMenu = ({ board, onBoardUpdated }: BoardActionsMenuProps) => {
+const BoardActionsMenu = ({
+  board,
+  onBoardUpdated,
+  onBoardVisibilityChange,
+}: BoardActionsMenuProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isRenameModalOpen, setRenameModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -39,13 +44,15 @@ const BoardActionsMenu = ({ board, onBoardUpdated }: BoardActionsMenuProps) => {
   };
 
   const handleVisibilityChange = async () => {
+    const newVisibility = !board.isPublic;
     try {
       await updateBoardById(board.id, {
         isPublic: !board.isPublic,
       });
 
+      onBoardVisibilityChange(board.id, newVisibility);
+
       setMenuOpen(false);
-      await onBoardUpdated();
     } catch (error) {
       console.log("Update board visibility error", error);
     }

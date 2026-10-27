@@ -15,9 +15,10 @@ const BoardsPage = () => {
   const [message, setMessage] = useState("");
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
-  // TODO: avoid showing the full loading state when refetching after board actions
-  const fetchBoards = async () => {
-    setLoading(true);
+  const fetchBoards = async (showLoading = true) => {
+    if (showLoading) {
+      setLoading(true);
+    }
     setMessage("");
 
     try {
@@ -27,9 +28,21 @@ const BoardsPage = () => {
       console.log("Failed to load boards", error);
       setMessage("Failed to load boards.");
     } finally {
-      setLoading(false);
+      if (showLoading) {
+        setLoading(false);
+      }
     }
   };
+
+  const updateBoardVisibility = (boardId: string, isPublic: boolean) => {
+    setBoards((prevBoards) =>
+      prevBoards.map((board) =>
+        board.id === boardId ? { ...board, isPublic } : board,
+      ),
+    );
+  };
+
+
 
   const openCreateModal = () => {
     setCreateModalOpen(true);
@@ -58,13 +71,14 @@ const BoardsPage = () => {
               emptyStateTitle="No boards yet..."
               emptyStateText="Create your first board to get started."
               variant="my-boards"
-              onBoardUpdated={fetchBoards}
+              onBoardUpdated={() => fetchBoards(false)}
+              onBoardVisibilityChange={updateBoardVisibility}
             />
           )}
           {isCreateModalOpen && (
             <CreateBoardModal
               onClose={closeCreateModal}
-              onBoardCreated={fetchBoards}
+              onBoardCreated={() => fetchBoards(false)}
             />
           )}
         </section>

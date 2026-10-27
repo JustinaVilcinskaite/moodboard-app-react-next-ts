@@ -9,6 +9,7 @@ type BoardsWrapperProps = {
   emptyStateText: string;
   variant: BoardCardVariant;
   onBoardUpdated?: () => Promise<void>;
+  onBoardVisibilityChange?: (boardId: string, isPublic: boolean) => void;
 };
 
 const BoardsWrapper = ({
@@ -18,6 +19,7 @@ const BoardsWrapper = ({
   emptyStateText,
   variant,
   onBoardUpdated,
+  onBoardVisibilityChange,
 }: BoardsWrapperProps) => {
   return (
     <div className={styles.wrapper}>
@@ -30,6 +32,7 @@ const BoardsWrapper = ({
             board={board}
             variant={variant}
             onBoardUpdated={onBoardUpdated}
+            onBoardVisibilityChange={onBoardVisibilityChange}
           />
         ))
       ) : (

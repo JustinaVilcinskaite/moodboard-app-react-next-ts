@@ -5,6 +5,7 @@ import { createBoard, updateBoardById } from "@/api/board";
 import { validateBoard } from "@/validations/boardValidation";
 import Button from "../Button/Button";
 import Message from "../Message/Message";
+import Modal from "../Modal/Modal";
 
 type BoardModalProps = {
   board?: Board;
@@ -61,86 +62,73 @@ const BoardModal = ({ board, onClose, onBoardSaved }: BoardModalProps) => {
   };
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
-        <div className={styles.header}>
-          <h2>{isEditing ? "Edit Board" : "Create Board"}</h2>
-          <Button
-            // TODO: add an svg icon
-            icon="×"
-            onClick={onClose}
-            variant="icon"
-            ariaLabel="Close board modal"
+    <Modal title={isEditing ? "Edit Board" : "Create Board"} onClose={onClose}>
+      <div className={styles.form}>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Title</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setMessage("");
+            }}
           />
         </div>
 
-        <div className={styles.form}>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-                setMessage("");
-              }}
-            />
-          </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Description</label>
+          <textarea
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+              setMessage("");
+            }}
+          />
+        </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-                setMessage("");
-              }}
-            />
-          </div>
+        <div className={styles.formGroup}>
+          <p className={styles.label}>Visibility</p>
+          <div className={styles.visibilityOptions}>
+            <label className={styles.radioOption}>
+              <input
+                type="radio"
+                name="visibility"
+                checked={!isPublic}
+                onChange={() => {
+                  setPublic(false);
+                }}
+              />
+              Private
+            </label>
 
-          <div className={styles.formGroup}>
-            <p className={styles.label}>Visibility</p>
-            <div className={styles.visibilityOptions}>
-              <label className={styles.radioOption}>
-                <input
-                  type="radio"
-                  name="visibility"
-                  checked={!isPublic}
-                  onChange={() => {
-                    setPublic(false);
-                  }}
-                />
-                Private
-              </label>
-
-              <label className={styles.radioOption}>
-                <input
-                  type="radio"
-                  name="visibility"
-                  checked={isPublic}
-                  onChange={() => {
-                    setPublic(true);
-                  }}
-                />
-                Public
-              </label>
-            </div>
-          </div>
-          {/* TODO: show validation errors under the related inputs */}
-          {message && <Message text={message} isError={true} />}
-
-          <div className={styles.actions}>
-            <Button title="Cancel" onClick={onClose} variant="secondary" />
-            <Button
-              title={isEditing ? "Save Changes" : "Create Board"}
-              onClick={handleSaveBoard}
-              isLoading={isSubmitting}
-              variant="primary"
-            />
+            <label className={styles.radioOption}>
+              <input
+                type="radio"
+                name="visibility"
+                checked={isPublic}
+                onChange={() => {
+                  setPublic(true);
+                }}
+              />
+              Public
+            </label>
           </div>
         </div>
+        {/* TODO: show validation errors under the related inputs */}
+        {message && <Message text={message} isError={true} />}
+
+        <div className={styles.actions}>
+          <Button title="Cancel" onClick={onClose} variant="secondary" />
+          <Button
+            title={isEditing ? "Save Changes" : "Create Board"}
+            onClick={handleSaveBoard}
+            isLoading={isSubmitting}
+            variant="primary"
+          />
+        </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 

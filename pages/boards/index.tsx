@@ -6,7 +6,7 @@ import { Board } from "@/types/board";
 import BoardsWrapper from "@/components/BoardsWrapper/BoardsWrapper";
 import Message from "@/components/Message/Message";
 import BoardsPageHeader from "@/components/BoardsPageHeader/BoardsPageHeader";
-import CreateBoardModal from "@/components/CreateBoardModal/CreateBoardModal";
+import BoardModal from "@/components/BoardModal/BoardModal";
 import styles from "./styles.module.css";
 
 const BoardsPage = () => {
@@ -33,16 +33,6 @@ const BoardsPage = () => {
       }
     }
   };
-
-  const updateBoardVisibility = (boardId: string, isPublic: boolean) => {
-    setBoards((prevBoards) =>
-      prevBoards.map((board) =>
-        board.id === boardId ? { ...board, isPublic } : board,
-      ),
-    );
-  };
-
-
 
   const openCreateModal = () => {
     setCreateModalOpen(true);
@@ -72,13 +62,12 @@ const BoardsPage = () => {
               emptyStateText="Create your first board to get started."
               variant="my-boards"
               onBoardUpdated={() => fetchBoards(false)}
-              onBoardVisibilityChange={updateBoardVisibility}
             />
           )}
           {isCreateModalOpen && (
-            <CreateBoardModal
+            <BoardModal
               onClose={closeCreateModal}
-              onBoardCreated={() => fetchBoards(false)}
+              onBoardSaved={() => fetchBoards(false)}
             />
           )}
         </section>

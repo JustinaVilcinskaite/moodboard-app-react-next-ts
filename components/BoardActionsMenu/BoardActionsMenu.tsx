@@ -1,15 +1,13 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { Board } from "@/types/board";
-import { updateBoardById } from "@/api/board";
 import Button from "../Button/Button";
-import RenameBoardModal from "../RenameBoardModal/RenameBoardModal";
+import BoardModal from "../BoardModal/BoardModal";
 import DeleteBoardModal from "../DeleteBoardModal/DeleteBoardModal";
 
 type BoardActionsMenuProps = {
   board: Board;
   onBoardUpdated: () => Promise<void>;
-  onBoardVisibilityChange: (boardId: string, isPublic: boolean) => void;
   isMenuOpen: boolean;
   onToggleMenu: () => void;
   onCloseMenu: () => void;
@@ -18,47 +16,26 @@ type BoardActionsMenuProps = {
 const BoardActionsMenu = ({
   board,
   onBoardUpdated,
-  onBoardVisibilityChange,
   isMenuOpen,
   onToggleMenu,
   onCloseMenu,
 }: BoardActionsMenuProps) => {
-  const [isRenameModalOpen, setRenameModalOpen] = useState(false);
-  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<"edit" | "delete" | null>(
+    null,
+  );
 
-  
-
-  const openRenameModal = () => {
-    setRenameModalOpen(true);
+  const openEditModal = () => {
+    setActiveModal("edit");
     onCloseMenu();
-  };
-
-  const closeRenameModal = () => {
-    setRenameModalOpen(false);
   };
 
   const openDeleteModal = () => {
-    setDeleteModalOpen(true);
+    setActiveModal("delete");
     onCloseMenu();
   };
 
-  const closeDeleteModal = () => {
-    setDeleteModalOpen(false);
-  };
-
-  const handleVisibilityChange = async () => {
-    const newVisibility = !board.isPublic;
-    try {
-      await updateBoardById(board.id, {
-        isPublic: !board.isPublic,
-      });
-
-      onBoardVisibilityChange(board.id, newVisibility);
-
-      onCloseMenu();
-    } catch (error) {
-      console.log("Update board visibility error", error);
-    }
+  const closeModal = () => {
+    setActiveModal(null);
   };
 
   // TODO: close the board actions menu when clicking outside of it
@@ -76,30 +53,25 @@ const BoardActionsMenu = ({
 
         {isMenuOpen && (
           <div className={styles.menu}>
-            <Button title="Rename" onClick={openRenameModal} variant="menu" />
+            <Button title="Edit" onClick={openEditModal} variant="menu" />
 
             <Button title="Delete" onClick={openDeleteModal} variant="menu" />
-
-            <Button
-              title={board.isPublic ? "Make private" : "Make public"}
-              onClick={handleVisibilityChange}
-              variant="menu"
-            />
           </div>
         )}
       </div>
 
-      {isRenameModalOpen && (
-        <RenameBoardModal
+      {activeModal === "edit" && (
+        <BoardModal
           board={board}
-          onClose={closeRenameModal}
-          onBoardUpdated={onBoardUpdated}
+          onClose={closeModal}
+          onBoardSaved={onBoardUpdated}
         />
       )}
-      {isDeleteModalOpen && (
+
+      {activeModal === "delete" && (
         <DeleteBoardModal
           board={board}
-          onClose={closeDeleteModal}
+          onClose={closeModal}
           onBoardUpdated={onBoardUpdated}
         />
       )}

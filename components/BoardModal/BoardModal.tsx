@@ -1,53 +1,60 @@
 import styles from "./styles.module.css";
 import { useState } from "react";
-import { createBoard } from "@/api/board";
-import { validateCreateBoard } from "@/validations/boardValidation";
+import { Board } from "@/types/board";
+import { createBoard, updateBoardById } from "@/api/board";
+import { validateBoard } from "@/validations/boardValidation";
 import Button from "../Button/Button";
 import Message from "../Message/Message";
 
-type CreateBoardModalProps = {
+type BoardModalProps = {
+  board?: Board;
   onClose: () => void;
-  onBoardCreated: () => Promise<void>;
+  onBoardSaved: () => Promise<void>;
 };
 
-const CreateBoardModal = ({
-  onClose,
-  onBoardCreated,
-}: CreateBoardModalProps) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [isPublic, setPublic] = useState(false);
+const BoardModal = ({ board, onClose, onBoardSaved }: BoardModalProps) => {
+  const isEditing = !!board;
+
+  const [title, setTitle] = useState(board?.title || "");
+  const [description, setDescription] = useState(board?.description || "");
+  const [isPublic, setPublic] = useState(board?.isPublic || false);
 
   const [message, setMessage] = useState("");
-  const [isError, setError] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
 
-  const handleCreateBoard = async () => {
-    const validationError = validateCreateBoard({ title, description });
+  const handleSaveBoard = async () => {
+    const validationError = validateBoard({ title, description });
 
     if (validationError) {
       setMessage(validationError);
-      setError(true);
+
       return;
     }
 
     setMessage("");
-    setError(false);
 
     try {
       setSubmitting(true);
-      await createBoard({
-        title,
-        description,
-        isPublic,
-      });
 
-      await onBoardCreated();
+      if (board) {
+        await updateBoardById(board.id, {
+          title,
+          description,
+          isPublic,
+        });
+      } else {
+        await createBoard({
+          title,
+          description,
+          isPublic,
+        });
+      }
+
+      await onBoardSaved();
       onClose();
     } catch (error) {
-      console.log("Create board error", error);
-      setMessage("Error creating board.");
-      setError(true);
+      console.log("Save board error", error);
+      setMessage(isEditing ? "Error updating board." : "Error creating board.");
     } finally {
       setSubmitting(false);
     }
@@ -57,13 +64,13 @@ const CreateBoardModal = ({
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <div className={styles.header}>
-          <h2>Create Board</h2>
+          <h2>{isEditing ? "Edit Board" : "Create Board"}</h2>
           <Button
             // TODO: add an svg icon
             icon="×"
             onClick={onClose}
             variant="icon"
-            ariaLabel="Close create board modal"
+            ariaLabel="Close board modal"
           />
         </div>
 
@@ -76,7 +83,6 @@ const CreateBoardModal = ({
               onChange={(e) => {
                 setTitle(e.target.value);
                 setMessage("");
-                setError(false);
               }}
             />
           </div>
@@ -88,7 +94,6 @@ const CreateBoardModal = ({
               onChange={(e) => {
                 setDescription(e.target.value);
                 setMessage("");
-                setError(false);
               }}
             />
           </div>
@@ -122,13 +127,13 @@ const CreateBoardModal = ({
             </div>
           </div>
           {/* TODO: show validation errors under the related inputs */}
-          {message && <Message text={message} isError={isError} />}
+          {message && <Message text={message} isError={true} />}
 
           <div className={styles.actions}>
             <Button title="Cancel" onClick={onClose} variant="secondary" />
             <Button
-              title="Create Board"
-              onClick={handleCreateBoard}
+              title={isEditing ? "Save Changes" : "Create Board"}
+              onClick={handleSaveBoard}
               isLoading={isSubmitting}
               variant="primary"
             />
@@ -139,4 +144,4 @@ const CreateBoardModal = ({
   );
 };
 
-export default CreateBoardModal;
+export default BoardModal;

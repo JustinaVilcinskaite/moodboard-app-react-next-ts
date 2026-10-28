@@ -1,12 +1,12 @@
-type CreateBoardValidationParams = {
+type BoardValidationParams = {
   title: string;
   description: string;
 };
 
-export const validateCreateBoard = ({
+export const validateBoard = ({
   title,
   description,
-}: CreateBoardValidationParams) => {
+}: BoardValidationParams) => {
   const trimmedTitle = title.trim();
   const trimmedDescription = description.trim();
 
@@ -25,20 +25,3 @@ export const validateCreateBoard = ({
   return null;
 };
 
-type RenameBoardValidationParams = {
-  title: string;
-};
-
-export const validateRenameBoard = ({ title }: RenameBoardValidationParams) => {
-  const trimmedTitle = title.trim();
-
-  if (!trimmedTitle) {
-    return "Title is required.";
-  }
-
-  if (trimmedTitle.length > 100) {
-    return "Title must be at most 100 characters long.";
-  }
-
-  return null;
-};

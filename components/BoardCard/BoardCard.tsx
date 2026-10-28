@@ -8,7 +8,6 @@ type BoardCardProps = {
   board: Board;
   variant: BoardCardVariant;
   onBoardUpdated?: () => Promise<void>;
-  onBoardVisibilityChange?: (boardId: string, isPublic: boolean) => void;
   isMenuOpen: boolean;
   onToggleMenu: () => void;
   onCloseMenu: () => void;
@@ -18,7 +17,6 @@ const BoardCard = ({
   board,
   variant,
   onBoardUpdated,
-  onBoardVisibilityChange,
   isMenuOpen,
   onToggleMenu,
   onCloseMenu,
@@ -48,11 +46,10 @@ const BoardCard = ({
           )}
         </div>
       </Link>
-      {isMyBoards && onBoardUpdated && onBoardVisibilityChange && (
+      {isMyBoards && onBoardUpdated &&  (
         <BoardActionsMenu
           board={board}
           onBoardUpdated={onBoardUpdated}
-          onBoardVisibilityChange={onBoardVisibilityChange}
           isMenuOpen={isMenuOpen}
           onToggleMenu={onToggleMenu}
           onCloseMenu={onCloseMenu}

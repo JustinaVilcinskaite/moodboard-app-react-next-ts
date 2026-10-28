@@ -10,7 +10,6 @@ type BoardsWrapperProps = {
   emptyStateText: string;
   variant: BoardCardVariant;
   onBoardUpdated?: () => Promise<void>;
-  onBoardVisibilityChange?: (boardId: string, isPublic: boolean) => void;
 };
 
 const BoardsWrapper = ({
@@ -20,7 +19,6 @@ const BoardsWrapper = ({
   emptyStateText,
   variant,
   onBoardUpdated,
-  onBoardVisibilityChange,
 }: BoardsWrapperProps) => {
   const [openMenuBoardId, setOpenMenuBoardId] = useState<string | null>(null);
 
@@ -35,7 +33,6 @@ const BoardsWrapper = ({
             board={board}
             variant={variant}
             onBoardUpdated={onBoardUpdated}
-            onBoardVisibilityChange={onBoardVisibilityChange}
             isMenuOpen={openMenuBoardId === board.id}
             onToggleMenu={() =>
               setOpenMenuBoardId((prevId) =>

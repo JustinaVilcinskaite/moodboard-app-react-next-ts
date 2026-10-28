@@ -17,7 +17,6 @@ const DeleteBoardModal = ({
   onBoardUpdated,
 }: DeleteBoardModalProps) => {
   const [message, setMessage] = useState("");
-  const [isError, setError] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
 
   const handleDeleteBoard = async () => {
@@ -31,7 +30,6 @@ const DeleteBoardModal = ({
     } catch (error) {
       console.log("Delete board error", error);
       setMessage("Error deleting board.");
-      setError(true);
     } finally {
       setSubmitting(false);
     }
@@ -58,7 +56,7 @@ const DeleteBoardModal = ({
           </p>
           <p>This action cannot be undone.</p>
 
-          {message && <Message text={message} isError={isError} />}
+          {message && <Message text={message} isError={true} />}
 
           <div className={styles.actions}>
             <Button title="Cancel" onClick={onClose} variant="secondary" />

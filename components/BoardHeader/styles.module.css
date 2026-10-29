@@ -7,7 +7,7 @@
 .topRow {
   display: flex;
   align-items: center;
-  gap: 2girem;
+  gap: 2rem;
 }
 
 .visibility {

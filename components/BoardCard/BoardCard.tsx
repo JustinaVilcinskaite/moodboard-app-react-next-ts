@@ -25,7 +25,7 @@ const BoardCard = ({
 
   return (
     <article className={styles.card}>
-      <Link href={`/boards/${board.id}`} className={styles.cardLink}>
+      <Link href={`/board/${board.id}`} className={styles.cardLink}>
         <div className={styles.thumbnail}>
           {board.thumbnailUrl && (
             <img src={board.thumbnailUrl} alt={`${board.title} thumbnail`} />
@@ -46,7 +46,7 @@ const BoardCard = ({
           )}
         </div>
       </Link>
-      {isMyBoards && onBoardUpdated &&  (
+      {isMyBoards && onBoardUpdated && (
         <BoardActionsMenu
           board={board}
           onBoardUpdated={onBoardUpdated}

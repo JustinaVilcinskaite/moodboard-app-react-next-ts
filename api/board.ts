@@ -1,5 +1,6 @@
 import { api } from "./axios";
 import { getAuthHeaders } from "@/utils/auth";
+import type { BoardDetailResponse } from "@/types/board";
 
 type CreateBoardProps = {
   title: string;
@@ -61,12 +62,12 @@ export const deleteBoardById = async (boardId: string) => {
   return response.data;
 };
 
-////
+export const getBoardById = async (boardId: string) => {
+  const headers = getAuthHeaders();
 
-// export const getBoardById = async (boardId: string) => {
-//   const headers = getAuthHeaders();
+  const response = await api.get<BoardDetailResponse>(`/boards/${boardId}`, {
+    headers,
+  });
 
-//   const response = await api.get(`/boards/${boardId}`, { headers });
-
-//   return response.data;
-// };
+  return response.data;
+};

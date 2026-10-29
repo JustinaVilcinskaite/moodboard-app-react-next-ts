@@ -42,6 +42,7 @@ const BoardsPage = () => {
     setCreateModalOpen(false);
   };
 
+  // TODO: Fetch boards only after authentication is confirmed
   useEffect(() => {
     fetchBoards();
   }, []);

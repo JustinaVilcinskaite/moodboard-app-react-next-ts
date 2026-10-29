@@ -5,6 +5,7 @@ import { getBoardById } from "@/api/board";
 import type { BoardDetailResponse } from "@/types/board";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Message from "@/components/Message/Message";
+import BoardHeader from "@/components/BoardHeader/BoardHeader";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -16,8 +17,10 @@ const BoardPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  const fetchBoard = async (id: string) => {
-    setLoading(true);
+  const fetchBoard = async (id: string, showLoading = true) => {
+    if (showLoading) {
+      setLoading(true);
+    }
     setMessage("");
 
     try {
@@ -28,7 +31,9 @@ const BoardPage = () => {
       setBoardData(null);
       setMessage("Failed to load board.");
     } finally {
-      setLoading(false);
+      if (showLoading) {
+        setLoading(false);
+      }
     }
   };
 
@@ -40,6 +45,10 @@ const BoardPage = () => {
     fetchBoard(boardId);
   }, [boardId, isAuthLoading, user?.id]);
 
+  const handleBoardDeleted = async () => {
+    await router.push("/boards");
+  };
+
   return (
     <PageTemplate>
       {isLoading ? (
@@ -47,12 +56,12 @@ const BoardPage = () => {
       ) : message ? (
         <Message text={message} isError={true} />
       ) : boardData ? (
-        <section>
-          <h1>{boardData.board.title}</h1>
-          <p>{boardData.board.description}</p>
-          {/* temporary */}
-          <p>{boardData.access}</p>
-        </section>
+        <BoardHeader
+          board={boardData.board}
+          isOwner={boardData.access === "owner"}
+          onBoardUpdated={() => fetchBoard(boardData.board.id, false)}
+          onBoardDeleted={handleBoardDeleted}
+        />
       ) : null}
     </PageTemplate>
   );

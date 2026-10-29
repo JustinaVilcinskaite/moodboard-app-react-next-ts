@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 2girem;
+}
+
+.visibility {
+  font-size: 14px;
+}

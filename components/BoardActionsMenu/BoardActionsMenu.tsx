@@ -8,6 +8,7 @@ import DeleteBoardModal from "../DeleteBoardModal/DeleteBoardModal";
 type BoardActionsMenuProps = {
   board: Board;
   onBoardUpdated: () => Promise<void>;
+  onBoardDeleted?: () => Promise<void>;
   isMenuOpen: boolean;
   onToggleMenu: () => void;
   onCloseMenu: () => void;
@@ -16,6 +17,7 @@ type BoardActionsMenuProps = {
 const BoardActionsMenu = ({
   board,
   onBoardUpdated,
+  onBoardDeleted,
   isMenuOpen,
   onToggleMenu,
   onCloseMenu,
@@ -72,7 +74,7 @@ const BoardActionsMenu = ({
         <DeleteBoardModal
           board={board}
           onClose={closeModal}
-          onBoardUpdated={onBoardUpdated}
+          onBoardUpdated={onBoardDeleted ?? onBoardUpdated}
         />
       )}
     </>

@@ -2,12 +2,15 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import { Board } from "@/types/board";
 import BoardActionsMenu from "../BoardActionsMenu/BoardActionsMenu";
+import Button from "../Button/Button";
 
 type BoardHeaderProps = {
   board: Board;
   isOwner: boolean;
   onBoardUpdated: () => Promise<void>;
   onBoardDeleted: () => Promise<void>;
+  // is it an ok name? onAddFolder. for creating borad i had  onCreateClick: () => void; but of course i will need a function for the adding images as well. just wnat to be cosnistent
+  onAddFolder: () => void;
 };
 
 const BoardHeader = ({
@@ -15,6 +18,7 @@ const BoardHeader = ({
   isOwner,
   onBoardUpdated,
   onBoardDeleted,
+  onAddFolder,
 }: BoardHeaderProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -49,6 +53,16 @@ const BoardHeader = ({
 
       {board.description && (
         <p className={styles.description}>{board.description}</p>
+      )}
+
+      {isOwner && (
+        <div className={styles.actionsRow}>
+          <Button
+            title="+ Add Folder"
+            onClick={onAddFolder}
+            variant="primary"
+          />
+        </div>
       )}
     </div>
   );

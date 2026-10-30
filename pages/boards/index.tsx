@@ -13,6 +13,7 @@ const BoardsPage = () => {
   const [boards, setBoards] = useState<Board[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  // is this a correct name? is it only responsible for create modal open? of the one for editing as well
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
   const fetchBoards = async (showLoading = true) => {

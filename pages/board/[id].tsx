@@ -10,6 +10,7 @@ import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Message from "@/components/Message/Message";
 import BoardHeader from "@/components/BoardHeader/BoardHeader";
 import FoldersWrapper from "@/components/FoldersWrapper/FoldersWrapper";
+import FolderModal from "@/components/FolderModal/FolderModal";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -22,6 +23,7 @@ const BoardPage = () => {
 
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [isCreateFolderModalOpen, setCreateFolderModalOpen] = useState(false);
 
   const fetchBoard = async (id: string) => {
     const data = await getBoardById(id);
@@ -75,8 +77,17 @@ const BoardPage = () => {
             isOwner={boardData.access === "owner"}
             onBoardUpdated={() => fetchBoard(boardData.board.id)}
             onBoardDeleted={handleBoardDeleted}
+            onAddFolder={() => setCreateFolderModalOpen(true)}
           />
           <FoldersWrapper folders={folders} />
+
+          {isCreateFolderModalOpen && boardData.access === "owner" && (
+            <FolderModal
+              boardId={boardData.board.id}
+              onClose={() => setCreateFolderModalOpen(false)}
+              onFolderSaved={() => fetchFolders(boardData.board.id)}
+            />
+          )}
         </>
       ) : null}
     </PageTemplate>

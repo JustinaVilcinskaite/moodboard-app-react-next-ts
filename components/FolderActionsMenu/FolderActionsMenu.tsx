@@ -3,6 +3,8 @@ import type { Folder } from "@/types/folder";
 import ActionsMenu from "../ActionsMenu/ActionsMenu";
 import Button from "../Button/Button";
 import FolderModal from "../FolderModal/FolderModal";
+import { deleteFolderById } from "@/api/folder";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 
 type FolderActionsMenuProps = {
   folder: Folder;
@@ -21,10 +23,17 @@ const FolderActionsMenu = ({
   onToggleMenu,
   onCloseMenu,
 }: FolderActionsMenuProps) => {
-  const [activeModal, setActiveModal] = useState<"rename" | null>(null);
+  const [activeModal, setActiveModal] = useState<"rename" | "delete" | null>(
+    null,
+  );
 
   const openRenameModal = () => {
     setActiveModal("rename");
+    onCloseMenu();
+  };
+
+  const openDeleteModal = () => {
+    setActiveModal("delete");
     onCloseMenu();
   };
 
@@ -40,6 +49,7 @@ const FolderActionsMenu = ({
         ariaLabel="Folder options"
       >
         <Button title="Rename" onClick={openRenameModal} variant="menu" />
+        <Button title="Delete" onClick={openDeleteModal} variant="menu" />
       </ActionsMenu>
 
       {activeModal === "rename" && (
@@ -48,6 +58,20 @@ const FolderActionsMenu = ({
           folder={folder}
           onClose={closeModal}
           onFolderSaved={onFolderUpdated}
+        />
+      )}
+
+      {activeModal === "delete" && (
+        <ConfirmDeleteModal
+          title="Delete Folder"
+          itemName={folder.title}
+          warning="Images in this folder will be moved to General folder. This action cannot be undone."
+          errorMessage="Error deleting folder."
+          onClose={closeModal}
+          onConfirm={async () => {
+            await deleteFolderById(folder.id);
+            await onFolderUpdated();
+          }}
         />
       )}
     </>

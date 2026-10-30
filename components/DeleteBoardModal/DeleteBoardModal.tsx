@@ -1,3 +1,5 @@
+// TODO: delete the this component!
+
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { Board } from "@/types/board";

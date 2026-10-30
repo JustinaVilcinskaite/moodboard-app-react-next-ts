@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Board } from "@/types/board";
 import Button from "../Button/Button";
 import BoardModal from "../BoardModal/BoardModal";
-import DeleteBoardModal from "../DeleteBoardModal/DeleteBoardModal";
 import ActionsMenu from "../ActionsMenu/ActionsMenu";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
+import { deleteBoardById } from "@/api/board";
 
 type BoardActionsMenuProps = {
   board: Board;
@@ -52,7 +53,7 @@ const BoardActionsMenu = ({
         <Button title="Edit" onClick={openEditModal} variant="menu" />
         <Button title="Delete" onClick={openDeleteModal} variant="menu" />
       </ActionsMenu>
-      
+
       {activeModal === "edit" && (
         <BoardModal
           board={board}
@@ -62,10 +63,16 @@ const BoardActionsMenu = ({
       )}
 
       {activeModal === "delete" && (
-        <DeleteBoardModal
-          board={board}
+        <ConfirmDeleteModal
+          title="Delete Board"
+          itemName={board.title}
+          warning="This action cannot be undone."
+          errorMessage="Error deleting board."
           onClose={closeModal}
-          onBoardUpdated={onBoardDeleted ?? onBoardUpdated}
+          onConfirm={async () => {
+            await deleteBoardById(board.id);
+            await (onBoardDeleted ?? onBoardUpdated)();
+          }}
         />
       )}
     </>

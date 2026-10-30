@@ -30,7 +30,6 @@ export const createFolderByBoardId = async (
   return response.data;
 };
 
-
 type UpdateFolderProps = {
   title: string;
 };
@@ -44,6 +43,14 @@ export const updateFolderById = async (
   const response = await api.patch(`/folders/${folderId}`, updates, {
     headers,
   });
+
+  return response.data;
+};
+
+export const deleteFolderById = async (folderId: string) => {
+  const headers = getAuthHeaders();
+
+  const response = await api.delete(`/folders/${folderId}`, { headers });
 
   return response.data;
 };

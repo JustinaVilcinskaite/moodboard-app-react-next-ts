@@ -24,6 +24,7 @@ const BoardPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [isCreateFolderModalOpen, setCreateFolderModalOpen] = useState(false);
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
 
   const fetchBoard = async (id: string) => {
     const data = await getBoardById(id);
@@ -64,6 +65,14 @@ const BoardPage = () => {
     await router.push("/boards");
   };
 
+  const toggleMenu = (id: string) => {
+    setOpenMenuId((prevId) => (prevId === id ? null : id));
+  };
+
+  const closeMenu = () => {
+    setOpenMenuId(null);
+  };
+
   return (
     <PageTemplate>
       {isLoading ? (
@@ -78,8 +87,19 @@ const BoardPage = () => {
             onBoardUpdated={() => fetchBoard(boardData.board.id)}
             onBoardDeleted={handleBoardDeleted}
             onAddFolder={() => setCreateFolderModalOpen(true)}
+            isMenuOpen={openMenuId === "board"}
+            onToggleMenu={() => toggleMenu("board")}
+            onCloseMenu={closeMenu}
           />
-          <FoldersWrapper folders={folders} />
+          <FoldersWrapper
+            folders={folders}
+            boardId={boardData.board.id}
+            isOwner={boardData.access === "owner"}
+            onFoldersUpdated={() => fetchFolders(boardData.board.id)}
+            openMenuId={openMenuId}
+            onToggleMenu={toggleMenu}
+            onCloseMenu={closeMenu}
+          />
 
           {isCreateFolderModalOpen && boardData.access === "owner" && (
             <FolderModal

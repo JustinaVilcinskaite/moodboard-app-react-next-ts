@@ -1,9 +1,9 @@
 import { useState } from "react";
-import styles from "./styles.module.css";
 import { Board } from "@/types/board";
 import Button from "../Button/Button";
 import BoardModal from "../BoardModal/BoardModal";
 import DeleteBoardModal from "../DeleteBoardModal/DeleteBoardModal";
+import ActionsMenu from "../ActionsMenu/ActionsMenu";
 
 type BoardActionsMenuProps = {
   board: Board;
@@ -44,24 +44,15 @@ const BoardActionsMenu = ({
 
   return (
     <>
-      <div className={styles.menuWrapper}>
-        <Button
-          // TODO: add an svg icon
-          icon="•••"
-          onClick={onToggleMenu}
-          variant="icon"
-          ariaLabel="Board options"
-        />
-
-        {isMenuOpen && (
-          <div className={styles.menu}>
-            <Button title="Edit" onClick={openEditModal} variant="menu" />
-
-            <Button title="Delete" onClick={openDeleteModal} variant="menu" />
-          </div>
-        )}
-      </div>
-
+      <ActionsMenu
+        isMenuOpen={isMenuOpen}
+        onToggleMenu={onToggleMenu}
+        ariaLabel="Board options"
+      >
+        <Button title="Edit" onClick={openEditModal} variant="menu" />
+        <Button title="Delete" onClick={openDeleteModal} variant="menu" />
+      </ActionsMenu>
+      
       {activeModal === "edit" && (
         <BoardModal
           board={board}

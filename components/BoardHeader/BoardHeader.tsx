@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./styles.module.css";
 import { Board } from "@/types/board";
 import BoardActionsMenu from "../BoardActionsMenu/BoardActionsMenu";
@@ -9,8 +8,10 @@ type BoardHeaderProps = {
   isOwner: boolean;
   onBoardUpdated: () => Promise<void>;
   onBoardDeleted: () => Promise<void>;
-  // is it an ok name? onAddFolder. for creating borad i had  onCreateClick: () => void; but of course i will need a function for the adding images as well. just wnat to be cosnistent
   onAddFolder: () => void;
+  isMenuOpen: boolean;
+  onToggleMenu: () => void;
+  onCloseMenu: () => void;
 };
 
 const BoardHeader = ({
@@ -19,17 +20,10 @@ const BoardHeader = ({
   onBoardUpdated,
   onBoardDeleted,
   onAddFolder,
+  isMenuOpen,
+  onToggleMenu,
+  onCloseMenu,
 }: BoardHeaderProps) => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
   return (
     <div className={styles.header}>
       <div className={styles.topRow}>
@@ -41,8 +35,8 @@ const BoardHeader = ({
             onBoardUpdated={onBoardUpdated}
             onBoardDeleted={onBoardDeleted}
             isMenuOpen={isMenuOpen}
-            onToggleMenu={toggleMenu}
-            onCloseMenu={closeMenu}
+            onToggleMenu={onToggleMenu}
+            onCloseMenu={onCloseMenu}
           />
         )}
       </div>

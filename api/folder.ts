@@ -29,3 +29,21 @@ export const createFolderByBoardId = async (
 
   return response.data;
 };
+
+
+type UpdateFolderProps = {
+  title: string;
+};
+
+export const updateFolderById = async (
+  folderId: string,
+  updates: UpdateFolderProps,
+) => {
+  const headers = getAuthHeaders();
+
+  const response = await api.patch(`/folders/${folderId}`, updates, {
+    headers,
+  });
+
+  return response.data;
+};

@@ -23,51 +23,14 @@ const BoardPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  //   fetching board
-  //   const fetchBoard = async (id: string, showLoading = true) => {
-  //     if (showLoading) {
-  //       setLoading(true);
-  //     }
-  //     setMessage("");
+  const fetchBoard = async (id: string) => {
+    const data = await getBoardById(id);
+    setBoardData(data);
+  };
 
-  //     try {
-  //       const data = await getBoardById(id);
-  //       setBoardData(data);
-  //     } catch (error) {
-  //       console.log("Failed to load board", error);
-  //       setBoardData(null);
-  //       setMessage("Failed to load board.");
-  //     } finally {
-  //       if (showLoading) {
-  //         setLoading(false);
-  //       }
-  //     }
-  //   };
-
-  //   fetching board and folder
-  const fetchBoard = async (id: string, showLoading = true) => {
-    if (showLoading) {
-      setLoading(true);
-    }
-
-    setMessage("");
-
-    try {
-      const data = await getBoardById(id);
-      const foldersData = await getFoldersByBoardId(id);
-
-      setBoardData(data);
-      setFolders(foldersData.folders);
-    } catch (error) {
-      console.log("Failed to load board", error);
-      setBoardData(null);
-      setFolders([]);
-      setMessage("Failed to load board.");
-    } finally {
-      if (showLoading) {
-        setLoading(false);
-      }
-    }
+  const fetchFolders = async (id: string) => {
+    const data = await getFoldersByBoardId(id);
+    setFolders(data.folders);
   };
 
   useEffect(() => {
@@ -75,7 +38,24 @@ const BoardPage = () => {
       return;
     }
 
-    fetchBoard(boardId);
+    const fetchPageData = async () => {
+      setLoading(true);
+      setMessage("");
+
+      try {
+        await fetchBoard(boardId);
+        await fetchFolders(boardId);
+      } catch (error) {
+        console.log("Failed to load board or folders", error);
+        setBoardData(null);
+        setFolders([]);
+        setMessage("Failed to load board data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPageData();
   }, [boardId, isAuthLoading, user?.id]);
 
   const handleBoardDeleted = async () => {
@@ -93,7 +73,7 @@ const BoardPage = () => {
           <BoardHeader
             board={boardData.board}
             isOwner={boardData.access === "owner"}
-            onBoardUpdated={() => fetchBoard(boardData.board.id, false)}
+            onBoardUpdated={() => fetchBoard(boardData.board.id)}
             onBoardDeleted={handleBoardDeleted}
           />
           <FoldersWrapper folders={folders} />

@@ -12,6 +12,7 @@ type BoardHeaderProps = {
   isMenuOpen: boolean;
   onToggleMenu: () => void;
   onCloseMenu: () => void;
+  onAddImage: () => void;
 };
 
 const BoardHeader = ({
@@ -23,6 +24,7 @@ const BoardHeader = ({
   isMenuOpen,
   onToggleMenu,
   onCloseMenu,
+  onAddImage,
 }: BoardHeaderProps) => {
   return (
     <div className={styles.header}>
@@ -51,6 +53,7 @@ const BoardHeader = ({
 
       {isOwner && (
         <div className={styles.actionsRow}>
+          <Button title="+ Add Image" onClick={onAddImage} variant="primary" />
           <Button
             title="+ Add Folder"
             onClick={onAddFolder}

@@ -8,3 +8,26 @@ export const getImagesByBoardId = async (boardId: string) => {
 
   return response.data;
 };
+
+type CreateImageProps = {
+  url: string;
+  folderId: string;
+};
+
+export const createImageByUrl = async (
+  boardId: string,
+  { url, folderId }: CreateImageProps,
+) => {
+  const headers = getAuthHeaders();
+
+  const body = {
+    url,
+    folderId,
+  };
+
+  const response = await api.post(`/boards/${boardId}/images`, body, {
+    headers,
+  });
+
+  return response.data;
+};

@@ -13,7 +13,7 @@ import Message from "@/components/Message/Message";
 import BoardHeader from "@/components/BoardHeader/BoardHeader";
 import FoldersWrapper from "@/components/FoldersWrapper/FoldersWrapper";
 import FolderModal from "@/components/FolderModal/FolderModal";
-
+import AddImageModal from "@/components/AddImageModal/AddImageModal";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -29,6 +29,9 @@ const BoardPage = () => {
   const [message, setMessage] = useState("");
   const [isCreateFolderModalOpen, setCreateFolderModalOpen] = useState(false);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+
+  const [isAddImageModalOpen, setAddImageModalOpen] = useState(false);
+  const [targetFolderId, setTargetFolderId] = useState<string | null>(null);
 
   const fetchBoard = async (id: string) => {
     const data = await getBoardById(id);
@@ -84,6 +87,11 @@ const BoardPage = () => {
     setOpenMenuId(null);
   };
 
+  const openAddImageModal = (folderId: string | null = null) => {
+    setTargetFolderId(folderId);
+    setAddImageModalOpen(true);
+  };
+
   return (
     <PageTemplate>
       {isLoading ? (
@@ -98,6 +106,7 @@ const BoardPage = () => {
             onBoardUpdated={() => fetchBoard(boardData.board.id)}
             onBoardDeleted={handleBoardDeleted}
             onAddFolder={() => setCreateFolderModalOpen(true)}
+            onAddImage={() => openAddImageModal()}
             isMenuOpen={openMenuId === "board"}
             onToggleMenu={() => toggleMenu("board")}
             onCloseMenu={closeMenu}
@@ -107,7 +116,11 @@ const BoardPage = () => {
             images={images}
             boardId={boardData.board.id}
             isOwner={boardData.access === "owner"}
-            onFoldersUpdated={() => fetchFolders(boardData.board.id)}
+            onFoldersUpdated={async () => {
+              await fetchFolders(boardData.board.id);
+              await fetchImages(boardData.board.id);
+            }}
+            onAddImage={openAddImageModal}
             openMenuId={openMenuId}
             onToggleMenu={toggleMenu}
             onCloseMenu={closeMenu}
@@ -118,6 +131,16 @@ const BoardPage = () => {
               boardId={boardData.board.id}
               onClose={() => setCreateFolderModalOpen(false)}
               onFolderSaved={() => fetchFolders(boardData.board.id)}
+            />
+          )}
+
+          {isAddImageModalOpen && boardData.access === "owner" && (
+            <AddImageModal
+              boardId={boardData.board.id}
+              folders={folders}
+              initialFolderId={targetFolderId}
+              onClose={() => setAddImageModalOpen(false)}
+              onImageAdded={() => fetchImages(boardData.board.id)}
             />
           )}
         </>

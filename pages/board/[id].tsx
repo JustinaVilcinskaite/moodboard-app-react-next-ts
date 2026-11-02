@@ -3,14 +3,17 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
 import { getBoardById } from "@/api/board";
 import { getFoldersByBoardId } from "@/api/folder";
+import { getImagesByBoardId } from "@/api/image";
 import type { BoardDetailResponse } from "@/types/board";
 import type { Folder } from "@/types/folder";
+import type { Image } from "@/types/image";
 
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Message from "@/components/Message/Message";
 import BoardHeader from "@/components/BoardHeader/BoardHeader";
 import FoldersWrapper from "@/components/FoldersWrapper/FoldersWrapper";
 import FolderModal from "@/components/FolderModal/FolderModal";
+
 
 const BoardPage = () => {
   const router = useRouter();
@@ -20,6 +23,7 @@ const BoardPage = () => {
 
   const [boardData, setBoardData] = useState<BoardDetailResponse | null>(null);
   const [folders, setFolders] = useState<Folder[]>([]);
+  const [images, setImages] = useState<Image[]>([]);
 
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
@@ -36,6 +40,11 @@ const BoardPage = () => {
     setFolders(data.folders);
   };
 
+  const fetchImages = async (id: string) => {
+    const data = await getImagesByBoardId(id);
+    setImages(data.images);
+  };
+
   useEffect(() => {
     if (isAuthLoading || typeof boardId !== "string") {
       return;
@@ -48,10 +57,12 @@ const BoardPage = () => {
       try {
         await fetchBoard(boardId);
         await fetchFolders(boardId);
+        await fetchImages(boardId);
       } catch (error) {
-        console.log("Failed to load board or folders", error);
+        console.log("Failed to load board, folders or images", error);
         setBoardData(null);
         setFolders([]);
+        setImages([]);
         setMessage("Failed to load board data.");
       } finally {
         setLoading(false);
@@ -93,6 +104,7 @@ const BoardPage = () => {
           />
           <FoldersWrapper
             folders={folders}
+            images={images}
             boardId={boardData.board.id}
             isOwner={boardData.access === "owner"}
             onFoldersUpdated={() => fetchFolders(boardData.board.id)}

@@ -1,9 +1,12 @@
 import styles from "./styles.module.css";
 import type { Folder } from "@/types/folder";
+import type { Image } from "@/types/image";
 import FolderActionsMenu from "../FolderActionsMenu/FolderActionsMenu";
+import ImagesWrapper from "../ImagesWrapper/ImagesWrapper";
 
 type FolderBlockProps = {
   folder: Folder;
+  images: Image[];
   boardId: string;
   isOwner: boolean;
   onFolderUpdated: () => Promise<void>;
@@ -14,6 +17,7 @@ type FolderBlockProps = {
 
 const FolderBlock = ({
   folder,
+  images,
   boardId,
   isOwner,
   isMenuOpen,
@@ -36,6 +40,7 @@ const FolderBlock = ({
           />
         )}
       </div>
+      <ImagesWrapper images={images} />
     </div>
   );
 };

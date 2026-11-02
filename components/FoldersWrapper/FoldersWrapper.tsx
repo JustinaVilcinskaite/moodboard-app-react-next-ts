@@ -1,9 +1,11 @@
 import styles from "./styles.module.css";
 import type { Folder } from "@/types/folder";
+import type { Image } from "@/types/image";
 import FolderBlock from "../FolderBlock/FolderBlock";
 
 type FoldersWrapperProps = {
   folders: Folder[];
+  images: Image[];
   boardId: string;
   isOwner: boolean;
   onFoldersUpdated: () => Promise<void>;
@@ -14,6 +16,7 @@ type FoldersWrapperProps = {
 
 const FoldersWrapper = ({
   folders,
+  images,
   boardId,
   isOwner,
   openMenuId,
@@ -27,6 +30,7 @@ const FoldersWrapper = ({
         <FolderBlock
           key={folder.id}
           folder={folder}
+          images={images.filter((image) => image.folderId === folder.id)}
           boardId={boardId}
           isOwner={isOwner}
           onFolderUpdated={onFoldersUpdated}

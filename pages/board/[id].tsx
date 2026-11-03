@@ -1,3 +1,4 @@
+import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
@@ -14,6 +15,7 @@ import BoardHeader from "@/components/BoardHeader/BoardHeader";
 import FoldersWrapper from "@/components/FoldersWrapper/FoldersWrapper";
 import FolderModal from "@/components/FolderModal/FolderModal";
 import AddImageModal from "@/components/AddImageModal/AddImageModal";
+import ImageDetailsPanel from "@/components/ImageDetailsPanel/ImageDetailsPanel";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -24,6 +26,7 @@ const BoardPage = () => {
   const [boardData, setBoardData] = useState<BoardDetailResponse | null>(null);
   const [folders, setFolders] = useState<Folder[]>([]);
   const [images, setImages] = useState<Image[]>([]);
+  const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
 
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
@@ -32,6 +35,8 @@ const BoardPage = () => {
 
   const [isAddImageModalOpen, setAddImageModalOpen] = useState(false);
   const [targetFolderId, setTargetFolderId] = useState<string | null>(null);
+
+  const selectedImage = images.find((image) => image.id === selectedImageId);
 
   const fetchBoard = async (id: string) => {
     const data = await getBoardById(id);
@@ -111,20 +116,34 @@ const BoardPage = () => {
             onToggleMenu={() => toggleMenu("board")}
             onCloseMenu={closeMenu}
           />
-          <FoldersWrapper
-            folders={folders}
-            images={images}
-            boardId={boardData.board.id}
-            isOwner={boardData.access === "owner"}
-            onFoldersUpdated={async () => {
-              await fetchFolders(boardData.board.id);
-              await fetchImages(boardData.board.id);
-            }}
-            onAddImage={openAddImageModal}
-            openMenuId={openMenuId}
-            onToggleMenu={toggleMenu}
-            onCloseMenu={closeMenu}
-          />
+          <div
+            className={`${styles.workspace} ${selectedImage ? styles.withPanel : ""}`}
+          >
+            <FoldersWrapper
+              folders={folders}
+              images={images}
+              boardId={boardData.board.id}
+              isOwner={boardData.access === "owner"}
+              onFoldersUpdated={async () => {
+                await fetchFolders(boardData.board.id);
+                await fetchImages(boardData.board.id);
+              }}
+              onAddImage={openAddImageModal}
+              selectedImageId={selectedImageId}
+              onSelectImage={setSelectedImageId}
+              openMenuId={openMenuId}
+              onToggleMenu={toggleMenu}
+              onCloseMenu={closeMenu}
+            />
+
+            {selectedImage && (
+              <ImageDetailsPanel
+                image={selectedImage}
+                folders={folders}
+                onClose={() => setSelectedImageId(null)}
+              />
+            )}
+          </div>
 
           {isCreateFolderModalOpen && boardData.access === "owner" && (
             <FolderModal

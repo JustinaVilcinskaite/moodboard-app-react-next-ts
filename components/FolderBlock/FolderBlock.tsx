@@ -15,6 +15,8 @@ type FolderBlockProps = {
   onToggleMenu: () => void;
   onCloseMenu: () => void;
   onAddImage: (folderId: string) => void;
+  selectedImageId: string | null;
+  onSelectImage: (imageId: string) => void;
 };
 
 const FolderBlock = ({
@@ -27,6 +29,8 @@ const FolderBlock = ({
   onCloseMenu,
   onFolderUpdated,
   onAddImage,
+  selectedImageId,
+  onSelectImage,
 }: FolderBlockProps) => {
   return (
     <div className={styles.folder}>
@@ -54,7 +58,11 @@ const FolderBlock = ({
         )}
       </div>
 
-      <ImagesWrapper images={images} />
+      <ImagesWrapper
+        images={images}
+        selectedImageId={selectedImageId}
+        onSelectImage={onSelectImage}
+      />
     </div>
   );
 };

@@ -13,6 +13,8 @@ type FoldersWrapperProps = {
   onToggleMenu: (id: string) => void;
   onCloseMenu: () => void;
   onAddImage: (folderId: string) => void;
+  selectedImageId: string | null;
+  onSelectImage: (imageId: string) => void;
 };
 
 const FoldersWrapper = ({
@@ -25,6 +27,8 @@ const FoldersWrapper = ({
   onCloseMenu,
   onFoldersUpdated,
   onAddImage,
+  selectedImageId,
+  onSelectImage,
 }: FoldersWrapperProps) => {
   return (
     <div className={styles.wrapper}>
@@ -37,6 +41,8 @@ const FoldersWrapper = ({
           isOwner={isOwner}
           onFolderUpdated={onFoldersUpdated}
           onAddImage={onAddImage}
+          selectedImageId={selectedImageId}
+          onSelectImage={onSelectImage}
           isMenuOpen={openMenuId === folder.id}
           onToggleMenu={() => onToggleMenu(folder.id)}
           onCloseMenu={onCloseMenu}

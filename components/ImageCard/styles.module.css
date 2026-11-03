@@ -1,9 +1,26 @@
 .card {
-  min-width: 0;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: none;
+  background: none;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+.selected {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+.card:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -3px;
 }

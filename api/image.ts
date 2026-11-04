@@ -34,6 +34,7 @@ export const createImageByUrl = async (
 
 type UpdateImageProps = {
   note: string;
+  folderId?: string;
 };
 
 export const updateImageById = async (

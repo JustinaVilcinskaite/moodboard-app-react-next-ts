@@ -24,6 +24,7 @@ const ImageDetailsPanel = ({
   onImageUpdated,
 }: ImageDetailsPanelProps) => {
   const [note, setNote] = useState(image.note);
+  const [folderId, setFolderId] = useState(image.folderId);
 
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
@@ -47,6 +48,7 @@ const ImageDetailsPanel = ({
 
       await updateImageById(image.id, {
         note,
+        folderId,
       });
 
       await onImageUpdated();
@@ -98,8 +100,26 @@ const ImageDetailsPanel = ({
 
       <div className={styles.section}>
         <h3>Folder</h3>
-        <p>{currentFolder?.title || "Unknown folder"}</p>
+        {isOwner ? (
+          <select
+            aria-label="Folder"
+            value={folderId}
+            onChange={(e) => {
+              setFolderId(e.target.value);
+              setMessage("");
+            }}
+          >
+            {folders.map((folder) => (
+              <option key={folder.id} value={folder.id}>
+                {folder.title}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <p>{currentFolder?.title || "Unknown folder"}</p>
+        )}
       </div>
+
       {isOwner && (
         <>
           {message && <Message text={message} isError={isError} />}

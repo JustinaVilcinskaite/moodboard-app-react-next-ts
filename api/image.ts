@@ -49,3 +49,11 @@ export const updateImageById = async (
 
   return response.data;
 };
+
+export const deleteImageById = async (imageId: string) => {
+  const headers = getAuthHeaders();
+
+  const response = await api.delete(`/images/${imageId}`, { headers });
+
+  return response.data;
+};

@@ -31,3 +31,20 @@ export const createImageByUrl = async (
 
   return response.data;
 };
+
+type UpdateImageProps = {
+  note: string;
+};
+
+export const updateImageById = async (
+  imageId: string,
+  updates: UpdateImageProps,
+) => {
+  const headers = getAuthHeaders();
+
+  const response = await api.patch(`/images/${imageId}`, updates, {
+    headers,
+  });
+
+  return response.data;
+};

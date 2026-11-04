@@ -26,6 +26,7 @@ const BoardPage = () => {
   const [boardData, setBoardData] = useState<BoardDetailResponse | null>(null);
   const [folders, setFolders] = useState<Folder[]>([]);
   const [images, setImages] = useState<Image[]>([]);
+  // TODO: Warn about unsaved changes before switching images or closing the panel.
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
 
   const [isLoading, setLoading] = useState(true);
@@ -138,9 +139,12 @@ const BoardPage = () => {
 
             {selectedImage && (
               <ImageDetailsPanel
+                key={selectedImage.id}
                 image={selectedImage}
+                isOwner={boardData.access === "owner"}
                 folders={folders}
                 onClose={() => setSelectedImageId(null)}
+                onImageUpdated={() => fetchImages(boardData.board.id)}
               />
             )}
           </div>

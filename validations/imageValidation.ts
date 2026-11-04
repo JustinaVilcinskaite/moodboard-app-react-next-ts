@@ -26,3 +26,15 @@ export const validateImage = ({ url, folderId }: ValidateImageProps) => {
 
   return null;
 };
+
+type ValidateImageUpdateProps = {
+  note: string;
+};
+
+export const validateImageUpdate = ({ note }: ValidateImageUpdateProps) => {
+  if (note.trim().length > 1000) {
+    return "Note must be at most 1000 characters long.";
+  }
+
+  return null;
+};

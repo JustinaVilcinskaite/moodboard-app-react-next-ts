@@ -1,7 +1,3 @@
-.card {
-  cursor: pointer;
-}
-
 .cardLink {
   display: flex;
   flex-direction: column;
@@ -12,13 +8,15 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   background-color: #e5e5e5;
-  border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.2s ease;
+
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 6px 0px;
+  transition: transform 0.3s ease;
 }
 
-.card:hover .thumbnail {
-  transform: scale(1.02);
+.cardLink:hover .thumbnail {
+  transform: scale(1.01);
 }
 
 .thumbnail img {
@@ -35,8 +33,8 @@
 }
 
 .title {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 .info {
@@ -45,6 +43,6 @@
 }
 
 .info p {
-  font-size: 0.9rem;
-  color: #444;
+  font-size: 0.7rem;
+  color: #595959;
 }

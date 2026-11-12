@@ -1,9 +1,6 @@
-.pageSection {
-  width: 100%;
-}
-
-.title {
-  margin: 0 0 2rem;
-  font-size: 2.5rem;
-  font-weight: 700;
+.pageError {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

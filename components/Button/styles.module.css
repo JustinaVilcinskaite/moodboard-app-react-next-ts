@@ -1,6 +1,7 @@
 .button {
   padding: 0.75rem 1rem;
   border: none;
+  background-color: transparent;
   border-radius: 6px;
   cursor: pointer;
   align-self: center;
@@ -14,6 +15,9 @@
 .primary {
   background-color: #fff;
   border: 1px solid rgb(94, 93, 93);
+  /* tryout */
+  background-color: transparent;
+  border: 1px solid rgb(126, 126, 126);
 }
 
 .primary:hover {
@@ -23,14 +27,17 @@
 .logout {
   display: block;
   width: 100%;
-  padding: 0.6rem 1rem;
   background-color: #fff;
-  font-size: 0.95rem;
-  text-align: center;
-  transition: 0.3s;
+  border: 1px solid var(--color-secondary);
+  border-radius: 2rem;
+  background-color: #fff;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
 }
 
-.logout:hover {
+/* TOD0: change color (find) */
+.logout:hover,
+.menu:hover {
   background-color: #f7f7f7;
 }
 
@@ -40,19 +47,16 @@
 }
 
 .icon {
-  border: none;
-  background: none;
+  color: #595959;
+  /* background: none; */
   padding: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .menu {
   width: 100%;
-  border: none;
-  background: none;
-  padding: 0.75rem 1rem;
   text-align: left;
-  justify-content: flex-start;
+  transition: background-color 0.3s;
 }
 
 .danger {
@@ -62,5 +66,6 @@
 @media (max-width: 768px) {
   .logout {
     text-align: left;
+    border: none;
   }
 }

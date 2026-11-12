@@ -31,6 +31,7 @@ const BoardPage = () => {
 
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+
   const [isCreateFolderModalOpen, setCreateFolderModalOpen] = useState(false);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
 
@@ -103,23 +104,26 @@ const BoardPage = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : message ? (
-        <Message text={message} isError={true} />
+        <div className={styles.pageError}>
+          <Message text={message} isError={true} />
+        </div>
       ) : boardData ? (
         <>
-          <BoardHeader
-            board={boardData.board}
-            isOwner={boardData.access === "owner"}
-            onBoardUpdated={() => fetchBoard(boardData.board.id)}
-            onBoardDeleted={handleBoardDeleted}
-            onAddFolder={() => setCreateFolderModalOpen(true)}
-            onAddImage={() => openAddImageModal()}
-            isMenuOpen={openMenuId === "board"}
-            onToggleMenu={() => toggleMenu("board")}
-            onCloseMenu={closeMenu}
-          />
           <div
             className={`${styles.workspace} ${selectedImage ? styles.withPanel : ""}`}
           >
+            <BoardHeader
+              board={boardData.board}
+              isOwner={boardData.access === "owner"}
+              onBoardUpdated={() => fetchBoard(boardData.board.id)}
+              onBoardDeleted={handleBoardDeleted}
+              onAddFolder={() => setCreateFolderModalOpen(true)}
+              onAddImage={() => openAddImageModal()}
+              isMenuOpen={openMenuId === "board"}
+              onToggleMenu={() => toggleMenu("board")}
+              onCloseMenu={closeMenu}
+            />
+
             <FoldersWrapper
               folders={folders}
               images={images}

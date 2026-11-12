@@ -40,6 +40,7 @@ const ImageDetailsPanel = ({
       setMessage(validationError);
       setIsError(true);
       return;
+      
     }
 
     setMessage("");

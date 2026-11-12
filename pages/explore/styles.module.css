@@ -1,9 +1,12 @@
-.pageSection {
-  width: 100%;
+.pageError {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .title {
-  margin: 0 0 2rem;
-  font-size: 2.5rem;
-  font-weight: 700;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+  padding-inline: var(--page-gutter);
 }

@@ -1,10 +1,9 @@
 .wrapper {
-  display: grid;
-  /* grid-template-columns: repeat(4, minmax(0, 1fr)); */
-  grid-template-columns: repeat(auto-fill, 200px);
-  gap: 0.75rem;
-}
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 
-.emptyState {
-  grid-column: 1 / -1;
+  gap: 0.8rem;
 }
+/* TDO0: emptyState layout, responsive */
+

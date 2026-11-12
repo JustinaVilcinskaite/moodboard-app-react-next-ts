@@ -1,3 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+:root {
+  --page-gutter: 2rem;
+  --color-secondary: #bcbbbb;
+  --header-height: 5rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,9 +14,17 @@
 
 body {
   min-width: 400px;
+  font-family: "Rubik", Arial;
 }
 
 a {
   text-decoration: none;
   color: #000;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --page-gutter: 1rem;
+    --header-height: 4.5rem;
+  }
 }

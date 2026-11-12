@@ -1,19 +1,25 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 32px;
+  gap: 1rem;
+  margin-bottom: 3rem;
+
+  padding-inline: var(--page-gutter);
 }
 
-.topRow {
+.title {
+  font-size: 1.3rem;
+}
+
+/* add later, when needed */
+/* .topRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
-}
+  gap: 1.5rem;
+} */
 
-.actionsRow {
+/* .actionsRow {
   display: flex;
   justify-content: flex-start;
-}
-
+} */

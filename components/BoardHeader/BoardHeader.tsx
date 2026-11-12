@@ -43,6 +43,7 @@ const BoardHeader = ({
         )}
       </div>
 
+      {/* maybe wrapper for p tags for structure */}
       <p className={styles.visibility}>
         {board.isPublic ? "Public" : "Private"}
       </p>

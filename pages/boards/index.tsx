@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import { getMyBoards } from "@/api/board";
@@ -10,6 +11,7 @@ import BoardModal from "@/components/BoardModal/BoardModal";
 import styles from "./styles.module.css";
 
 const BoardsPage = () => {
+  const { isLoading: isAuthLoading, isAuthenticated } = useAuth();
   const [boards, setBoards] = useState<Board[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
@@ -42,36 +44,38 @@ const BoardsPage = () => {
     setCreateModalOpen(false);
   };
 
-  // TODO: Fetch boards only after authentication is confirmed
   useEffect(() => {
+    if (isAuthLoading || !isAuthenticated) {
+      return;
+    }
     fetchBoards();
-  }, []);
+  }, [isAuthLoading, isAuthenticated]);
 
   return (
     <ProtectedRoute>
       <PageTemplate>
-        <section className={styles.pageSection}>
-          <BoardsPageHeader onCreateClick={openCreateModal} />
+        <BoardsPageHeader onCreateClick={openCreateModal} />
 
-          {message ? (
+        {message ? (
+          <div className={styles.pageError}>
             <Message text={message} isError={true} />
-          ) : (
-            <BoardsWrapper
-              boards={boards}
-              isLoading={isLoading}
-              emptyStateTitle="No boards yet..."
-              emptyStateText="Create your first board to get started."
-              variant="my-boards"
-              onBoardUpdated={() => fetchBoards(false)}
-            />
-          )}
-          {isCreateModalOpen && (
-            <BoardModal
-              onClose={closeCreateModal}
-              onBoardSaved={() => fetchBoards(false)}
-            />
-          )}
-        </section>
+          </div>
+        ) : (
+          <BoardsWrapper
+            boards={boards}
+            isLoading={isLoading}
+            emptyStateTitle="No boards yet..."
+            emptyStateText="Create your first board to get started."
+            variant="my-boards"
+            onBoardUpdated={() => fetchBoards(false)}
+          />
+        )}
+        {isCreateModalOpen && (
+          <BoardModal
+            onClose={closeCreateModal}
+            onBoardSaved={() => fetchBoards(false)}
+          />
+        )}
       </PageTemplate>
     </ProtectedRoute>
   );

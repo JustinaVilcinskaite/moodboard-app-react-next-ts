@@ -6,7 +6,8 @@ type MessageProps = {
 };
 
 const Message = ({ text, isError }: MessageProps) => {
-  return <h5 className={isError ? styles.error : styles.success}>{text}</h5>;
+  return <p className={isError ? styles.error : styles.success}>{text}</p>;
 };
 
 export default Message;
+

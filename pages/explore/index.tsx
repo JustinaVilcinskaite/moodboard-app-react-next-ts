@@ -31,20 +31,20 @@ const ExplorePage = () => {
   }, []);
   return (
     <PageTemplate>
-      <section className={styles.pageSection}>
-        <h1 className={styles.title}>Explore page</h1>
-        {message ? (
+      <h1 className={styles.title}>Explore</h1>
+      {message ? (
+        <div className={styles.pageError}>
           <Message text={message} isError={true} />
-        ) : (
-          <BoardsWrapper
-            boards={publicBoards}
-            isLoading={isLoading}
-            emptyStateTitle="No public boards yet..."
-            emptyStateText="Check back later to explore shared boards."
-            variant="explore"
-          />
-        )}
-      </section>
+        </div>
+      ) : (
+        <BoardsWrapper
+          boards={publicBoards}
+          isLoading={isLoading}
+          emptyStateTitle="No public boards yet..."
+          emptyStateText="Check back later to explore shared boards."
+          variant="explore"
+        />
+      )}
     </PageTemplate>
   );
 };

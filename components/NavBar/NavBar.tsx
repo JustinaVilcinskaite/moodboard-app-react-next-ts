@@ -35,42 +35,59 @@ const NavBar = ({
   };
 
   return (
-    <div className={`${styles.rightSection} ${isMenuOpen && styles.open}`}>
+    <div className={`${styles.rightSection} ${isMenuOpen ? styles.open : ""}`}>
       <nav className={styles.nav}>
         <ul>
           <li>
-            <Link href="/explore">Explore</Link>
+            <Link
+              href="/explore"
+              className={router.pathname === "/explore" ? styles.active : ""}
+              onClick={closeMenu}
+            >
+              Explore
+            </Link>
           </li>
 
           {!isLoading && isAuthenticated && (
             <li>
-              <Link href="/boards">My Boards</Link>
+              <Link
+                href="/boards"
+                className={router.pathname === "/boards" ? styles.active : ""}
+                onClick={closeMenu}
+              >
+                My Boards
+              </Link>
             </li>
           )}
 
           {!isLoading && !isAuthenticated && !shouldHideAuthLinks && (
             <>
               <li>
-                <Link href="/login">Log in</Link>
+                <Link href="/login" onClick={closeMenu}>
+                  Log in
+                </Link>
               </li>
               <li>
-                <Link href="/signup">Sign up</Link>
+                <Link href="/signup" onClick={closeMenu}>
+                  Sign up
+                </Link>
               </li>
             </>
           )}
         </ul>
       </nav>
 
-      {!isLoading && isAuthenticated && user &&(
+      {!isLoading && isAuthenticated && user && (
         <div className={styles.userMenuWrapper}>
           <button
             type="button"
             className={styles.userButton}
             onClick={toggleUserMenu}
             aria-label="Toggle user menu"
+            aria-expanded={isUserMenuOpen}
           >
             {getUserInitial(user.name)}
-            <img src={arrowIcon.src} alt="Open user menu" />
+            <img src={arrowIcon.src} alt="" />
           </button>
 
           {isUserMenuOpen && (

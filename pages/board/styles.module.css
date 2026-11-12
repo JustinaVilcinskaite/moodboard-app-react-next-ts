@@ -1,17 +1,20 @@
 .workspace {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1rem;
-  align-items: start;
+  --panel-width: 440px;
 }
 
 .withPanel {
-  grid-template-columns: minmax(0, 1fr) 500px;
+  margin-right: var(--panel-width);
+}
+
+.pageError {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 900px) {
   .withPanel {
-    grid-template-columns: minmax(0, 1fr);
+    margin-right: 0;
   }
 }
-

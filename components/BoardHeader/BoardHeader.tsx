@@ -43,14 +43,15 @@ const BoardHeader = ({
         )}
       </div>
 
-      {/* maybe wrapper for p tags for structure */}
-      <p className={styles.visibility}>
-        {board.isPublic ? "Public" : "Private"}
-      </p>
+      <div className={styles.info}>
+        <p className={styles.visibility}>
+          {board.isPublic ? "Public" : "Private"}
+        </p>
 
-      {board.description && (
-        <p className={styles.description}>{board.description}</p>
-      )}
+        {board.description && (
+          <p className={styles.description}>{board.description}</p>
+        )}
+      </div>
 
       {isOwner && (
         <div className={styles.actionsRow}>

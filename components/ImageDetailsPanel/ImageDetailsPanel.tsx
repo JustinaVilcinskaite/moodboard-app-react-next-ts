@@ -161,3 +161,4 @@ const ImageDetailsPanel = ({
 };
 
 export default ImageDetailsPanel;
+

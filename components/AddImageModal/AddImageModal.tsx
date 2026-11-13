@@ -103,7 +103,7 @@ const AddImageModal = ({
             title="Add Image"
             onClick={handleAddImage}
             isLoading={isSubmitting}
-            variant="primary"
+            variant="modalPrimary"
           />
         </div>
       </div>

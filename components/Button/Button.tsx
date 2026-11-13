@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import styles from "./styles.module.css";
 import SpinnerBtn from "../SpinnerBtn/SpinnerBtn";
 
@@ -6,7 +6,14 @@ type ButtonProps = {
   title?: string;
   onClick: () => void;
   isLoading?: boolean;
-  variant?: "primary" | "secondary" | "logout" | "icon" | "menu" | "danger" ;
+  variant?:
+    | "primary"
+    | "secondary"
+    | "modalPrimary"
+    | "danger"
+    | "icon"
+    | "menu"
+    | "logout";
   icon?: ReactNode;
   ariaLabel?: string;
 };
@@ -15,33 +22,30 @@ const Button = ({
   title,
   onClick,
   isLoading = false,
-  variant,
+  variant = "primary",
   icon,
   ariaLabel,
 }: ButtonProps) => {
   return (
     <button
-      className={`
-        ${styles.button}
-        ${variant === "primary" && styles.primary}
-        ${variant === "secondary" && styles.secondary}
-        ${variant === "logout" && styles.logout}
-        ${variant === "icon" && styles.icon}
-        ${variant === "menu" && styles.menu}
-        ${variant === "danger" && styles.danger}
-
-      `}
+      type="button"
+      className={`${styles.button} ${styles[variant] ?? ""}`}
       onClick={onClick}
       disabled={isLoading}
-      aria-label={ariaLabel}
+      aria-label={ariaLabel ?? title}
     >
-      {isLoading ? (
-        <SpinnerBtn />
-      ) : (
-        <>
-          {icon}
-          {title}
-        </>
+      <span
+        className={styles.content}
+        style={{ visibility: isLoading ? "hidden" : "visible" }}
+      >
+        {icon}
+        {title}
+      </span>
+
+      {isLoading && (
+        <span className={styles.spinner}>
+          <SpinnerBtn />
+        </span>
       )}
     </button>
   );

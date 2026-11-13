@@ -1,10 +1,19 @@
+/* Base */
+
 .button {
-  padding: 0.75rem 1rem;
-  border: none;
-  background-color: transparent;
+  padding: 0.7rem 1rem;
+  border: 1px solid transparent;
   border-radius: 6px;
+
+  background-color: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+
   cursor: pointer;
+  transition: background-color 0.2s ease;
+
   align-self: center;
+  position: relative;
 }
 
 .button:disabled {
@@ -12,17 +21,54 @@
   cursor: not-allowed;
 }
 
-.primary {
-  background-color: #fff;
-  border: 1px solid rgb(94, 93, 93);
-  /* tryout */
-  background-color: transparent;
-  border: 1px solid rgb(126, 126, 126);
+.button:focus-visible {
+  outline: 1px solid var(--color-secondary);
+  outline-offset: 1px;
 }
 
-.primary:hover {
-  background-color: #f7f7f7;
+/* Primary */
+
+.primary {
+  border-color: #858585;
 }
+
+/* Modal Primary */
+
+.modalPrimary {
+  border-color: #606060;
+  color: #202020;
+}
+
+.modalPrimary:not(:disabled):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Danger */
+
+.danger {
+  border-color: #b97777;
+}
+
+.danger:not(:disabled):hover {
+  background-color: rgba(170, 60, 60, 0.08);
+}
+
+/* Icon */
+
+.icon {
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+/* Menu */
+
+.menu {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+}
+
+/* Logout */
 
 .logout {
   display: block;
@@ -30,38 +76,34 @@
   background-color: #fff;
   border: 1px solid var(--color-secondary);
   border-radius: 2rem;
-  background-color: #fff;
-  font-size: 0.9rem;
   transition: background-color 0.3s;
 }
 
-/* TOD0: change color (find) */
-.logout:hover,
-.menu:hover {
+/* Shared hover */
+
+.primary:not(:disabled):hover,
+.menu:not(:disabled):hover,
+.logout:not(:disabled):hover {
   background-color: #f7f7f7;
 }
 
-.secondary {
-  background: transparent;
-  border: none;
+/* Spinner */
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.icon {
-  color: #595959;
-  /* background: none; */
-  padding: 0;
-  font-size: 1.2rem;
+.spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.menu {
-  width: 100%;
-  text-align: left;
-  transition: background-color 0.3s;
-}
-
-.danger {
-  background-color: rgb(252, 209, 209);
-}
+/* Responsive */
 
 @media (max-width: 768px) {
   .logout {

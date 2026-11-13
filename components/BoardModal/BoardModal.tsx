@@ -124,7 +124,7 @@ const BoardModal = ({ board, onClose, onBoardSaved }: BoardModalProps) => {
             title={isEditing ? "Save Changes" : "Create Board"}
             onClick={handleSaveBoard}
             isLoading={isSubmitting}
-            variant="primary"
+            variant="modalPrimary"
           />
         </div>
       </div>

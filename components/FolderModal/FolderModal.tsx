@@ -83,7 +83,7 @@ const FolderModal = ({
             title={isEditing ? "Save Changes" : "Create Folder"}
             onClick={handleSaveFolder}
             isLoading={isSubmitting}
-            variant="primary"
+            variant="modalPrimary"
           />
         </div>
       </div>

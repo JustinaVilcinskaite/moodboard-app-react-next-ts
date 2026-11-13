@@ -3,8 +3,7 @@
   inset: 0;
 
   background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: grayscale(100%);
-
+  backdrop-filter: grayscale(70%);
   display: flex;
   align-items: center;
   justify-content: center;

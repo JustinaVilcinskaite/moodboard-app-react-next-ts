@@ -1,8 +1,10 @@
 .wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 0.8rem;
+  width: 100%;
+  min-width: 0;
 }
-/* TDO0: emptyState layout, responsive*/
 
+.emptyState {
+  padding: 0.5rem 0;
+  color: #666;
+  font-size: 0.875rem;
+}

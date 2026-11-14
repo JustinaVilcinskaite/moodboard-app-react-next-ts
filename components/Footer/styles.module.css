@@ -4,4 +4,5 @@
   justify-content: flex-end;
   width: 100%;
   padding: 1rem var(--page-gutter);
+  font-size: 0.9rem;
 }

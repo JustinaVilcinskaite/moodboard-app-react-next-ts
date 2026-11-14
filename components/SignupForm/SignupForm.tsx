@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 
 import Message from "../Message/Message";
 import Button from "../Button/Button";
+import AuthRedirectLink from "../AuthRedirectLink/AuthRedirectLink";
 
 const SignupForm = () => {
   const router = useRouter();
@@ -17,16 +18,16 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [isError, setError] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
 
   const handleSignup = async () => {
     const validationError = validateSignup({ name, email, password });
     if (validationError) {
       setMessage(validationError);
-      setError(true);
       return;
     }
+
+    setMessage("");
 
     try {
       setSubmitting(true);
@@ -35,16 +36,9 @@ const SignupForm = () => {
 
       await validateUser();
 
-      console.log(data);
-      setError(false);
-      setMessage("Sign up successful! Redirecting...");
-      // TODO: later remove the setTimout and show message in /boards
-      setTimeout(() => {
-        router.push("/boards");
-      }, 1000);
+      await router.push("/boards");
     } catch (error) {
       console.log("Sign up error", error);
-      setError(true);
       setMessage("Error creating account");
     } finally {
       setSubmitting(false);
@@ -55,44 +49,57 @@ const SignupForm = () => {
     <div className={styles.main}>
       <div className={styles.form}>
         <h1>Create an Account</h1>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            setMessage("");
-            setError(false);
-          }}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            setMessage("");
-            setError(false);
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            setMessage("");
-            setError(false);
-          }}
-        />
+
+        <label className={styles.formGroup}>
+          <span>Name</span>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              setMessage("");
+            }}
+          />
+        </label>
+
+        <label className={styles.formGroup}>
+          <span>Email</span>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setMessage("");
+            }}
+          />
+        </label>
+
+        <label className={styles.formGroup}>
+          <span>Password</span>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setMessage("");
+            }}
+          />
+        </label>
 
         <Button
           title="Sign up"
           onClick={handleSignup}
           isLoading={isSubmitting}
         />
+        <AuthRedirectLink
+          text="Already have an account?"
+          linkText="Log in"
+          href="/login"
+        />
 
-        {message && <Message text={message} isError={isError} />}
+        <div className={styles.messageWrapper}>
+          {message && <Message text={message} isError={true} />}
+        </div>
       </div>
     </div>
   );

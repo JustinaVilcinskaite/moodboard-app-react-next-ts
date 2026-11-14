@@ -1,0 +1,13 @@
+.main {
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.linkText {
+  color: #606060;
+  transition: color 0.3s ease;
+}
+
+.linkText:hover {
+  color: #0c0c0c;
+}

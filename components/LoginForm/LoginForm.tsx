@@ -7,6 +7,7 @@ import { validateLogin } from "@/validations/loginValidation";
 import { useAuth } from "@/context/AuthContext";
 import Message from "../Message/Message";
 import Button from "../Button/Button";
+import AuthRedirectLink from "../AuthRedirectLink/AuthRedirectLink";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -15,16 +16,18 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [isError, setError] = useState(false);
+
   const [isSubmitting, setSubmitting] = useState(false);
 
   const handleLogin = async () => {
     const validationError = validateLogin({ email, password });
     if (validationError) {
       setMessage(validationError);
-      setError(true);
+
       return;
     }
+
+    setMessage("");
     try {
       setSubmitting(true);
       const data = await login({ email, password });
@@ -32,17 +35,10 @@ const LoginForm = () => {
 
       await validateUser();
 
-      console.log(data);
-      setError(false);
-      setMessage("Login successful! Redirecting...");
-
-      // TODO: later remove the setTimout and show message in /boards
-      setTimeout(() => {
-        router.push("/boards");
-      }, 1000);
+      await router.push("/boards");
     } catch (error) {
       console.log("Login error", error);
-      setError(true);
+
       setMessage("Bad email or password");
     } finally {
       setSubmitting(false);
@@ -52,31 +48,43 @@ const LoginForm = () => {
   return (
     <div className={styles.main}>
       <div className={styles.form}>
-        <h1>Login to Moodboard</h1>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            setMessage("");
-            setError(false);
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            setMessage("");
-            setError(false);
-          }}
+        <h1>Log in to Moodboard</h1>
+
+        <label className={styles.formGroup}>
+          <span>Email</span>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setMessage("");
+            }}
+          />
+        </label>
+
+        <label className={styles.formGroup}>
+          <span>Password</span>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setMessage("");
+            }}
+          />
+        </label>
+
+        <Button title="Log in" onClick={handleLogin} isLoading={isSubmitting} />
+
+        <AuthRedirectLink
+          text="Don't have an account?"
+          linkText="Sign up"
+          href="/signup"
         />
 
-        <Button title="Login" onClick={handleLogin} isLoading={isSubmitting} />
-
-        {message && <Message text={message} isError={isError} />}
+        <div className={styles.messageWrapper}>
+          {message && <Message text={message} isError={true} />}
+        </div>
       </div>
     </div>
   );

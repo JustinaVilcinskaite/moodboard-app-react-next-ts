@@ -2,14 +2,12 @@
 .success {
   font-size: 0.8rem;
   text-align: center;
-  margin-top: 0.5rem;
 }
 
 .error {
   color: rgb(200, 97, 97);
-  
 }
 
 .success {
-  color: rgb(75, 118, 75);
+  color: #000;
 }

@@ -63,7 +63,7 @@ const AddImageModal = ({
     <Modal title="Add Image" onClose={onClose}>
       <div className={styles.form}>
         <label className={styles.formGroup}>
-          <span className={styles.label}>Image URL</span>
+          <span>Image URL</span>
           <input
             type="url"
             value={url}
@@ -77,7 +77,7 @@ const AddImageModal = ({
 
         {showFolderSelect && (
           <label className={styles.formGroup}>
-            <span className={styles.label}>Folder</span>
+            <span>Folder</span>
             <select
               value={folderId}
               onChange={(e) => {
@@ -95,7 +95,9 @@ const AddImageModal = ({
           </label>
         )}
 
-        {message && <Message text={message} isError={true} />}
+        <div className={styles.messageWrapper}>
+          {message && <Message text={message} isError={true} />}
+        </div>
 
         <div className={styles.actions}>
           <Button title="Cancel" onClick={onClose} variant="secondary" />

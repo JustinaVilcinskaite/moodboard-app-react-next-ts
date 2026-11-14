@@ -64,8 +64,8 @@ const BoardModal = ({ board, onClose, onBoardSaved }: BoardModalProps) => {
   return (
     <Modal title={isEditing ? "Edit Board" : "Create Board"} onClose={onClose}>
       <div className={styles.form}>
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Title</label>
+        <label className={styles.formGroup}>
+          <span>Title</span>
           <input
             type="text"
             value={title}
@@ -74,10 +74,10 @@ const BoardModal = ({ board, onClose, onBoardSaved }: BoardModalProps) => {
               setMessage("");
             }}
           />
-        </div>
+        </label>
 
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Description</label>
+        <label className={styles.formGroup}>
+          <span>Description</span>
           <textarea
             value={description}
             onChange={(e) => {
@@ -85,10 +85,10 @@ const BoardModal = ({ board, onClose, onBoardSaved }: BoardModalProps) => {
               setMessage("");
             }}
           />
-        </div>
+        </label>
 
         <div className={styles.formGroup}>
-          <p className={styles.label}>Visibility</p>
+          <p>Visibility</p>
           <div className={styles.visibilityOptions}>
             <label className={styles.radioOption}>
               <input
@@ -115,8 +115,9 @@ const BoardModal = ({ board, onClose, onBoardSaved }: BoardModalProps) => {
             </label>
           </div>
         </div>
-        {/* TODO: show validation errors under the related inputs */}
-        {message && <Message text={message} isError={true} />}
+        <div className={styles.messageWrapper}>
+          {message && <Message text={message} isError={true} />}
+        </div>
 
         <div className={styles.actions}>
           <Button title="Cancel" onClick={onClose} variant="secondary" />

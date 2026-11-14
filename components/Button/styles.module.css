@@ -35,8 +35,8 @@
 /* Modal Primary */
 
 .modalPrimary {
-  border-color: #606060;
-  color: #202020;
+  border-color: var(--color-modal-border);
+  color: var(--color-modal-text);
 }
 
 .modalPrimary:not(:disabled):hover {

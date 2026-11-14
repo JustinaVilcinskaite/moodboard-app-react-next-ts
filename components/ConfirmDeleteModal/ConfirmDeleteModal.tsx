@@ -46,7 +46,9 @@ const ConfirmDeleteModal = ({
         </p>
         <p>{warning}</p>
 
-        {message && <Message text={message} isError={true} />}
+        <div className={styles.messageWrapper}>
+          {message && <Message text={message} isError={true} />}
+        </div>
 
         <div className={styles.actions}>
           <Button title="Cancel" onClick={onClose} variant="secondary" />

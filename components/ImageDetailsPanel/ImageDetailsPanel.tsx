@@ -65,6 +65,7 @@ const ImageDetailsPanel = ({
       setSubmitting(false);
     }
   };
+  
 
   return (
     <>
@@ -79,6 +80,7 @@ const ImageDetailsPanel = ({
             ariaLabel="Close image details"
           />
         </div>
+        
 
         <div className={styles.preview}>
           <img src={image.url} alt={image.note || "Moodboard image"} />
@@ -161,4 +163,5 @@ const ImageDetailsPanel = ({
 };
 
 export default ImageDetailsPanel;
+
 

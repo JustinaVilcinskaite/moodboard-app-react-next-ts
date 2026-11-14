@@ -2,8 +2,10 @@
 
 :root {
   --page-gutter: 2rem;
-  --color-secondary: #bcbbbb;
   --header-height: 5rem;
+  --color-secondary: #bcbbbb;
+  --color-modal-text: #202020;
+  --color-modal-border: #606060;
 }
 
 * {

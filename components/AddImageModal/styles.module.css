@@ -1,5 +1,6 @@
 .form {
   margin-top: 1.5rem;
+  font-size: 0.9rem;
 }
 
 .formGroup {
@@ -9,20 +10,25 @@
   margin-bottom: 1.25rem;
 }
 
-.label {
-  font-weight: 500;
-}
-
 .formGroup input,
 .formGroup select {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-
-  /* tryout */
+  border: 1px solid var(--color-modal-border);
   background-color: transparent;
-  border: 1px solid rgb(126, 126, 126);
+  border-radius: 5px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.formGroup input:focus-visible,
+.formGroup select:focus-visible {
+  outline: 1px solid rgb(83, 83, 83);
+}
+
+.formGroup input::placeholder {
+  color: #4c4b4b;
+  opacity: 1;
 }
 
 .actions {
@@ -31,4 +37,8 @@
   justify-content: flex-end;
   gap: 0.75rem;
   margin-top: 1.5rem;
+}
+
+.messageWrapper {
+  min-height: 1rem;
 }

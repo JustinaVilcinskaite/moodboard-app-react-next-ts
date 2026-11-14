@@ -64,7 +64,7 @@ const FolderModal = ({
     >
       <div className={styles.form}>
         <label className={styles.formGroup}>
-          <span className={styles.label}>Title</span>
+          <span>Title</span>
           <input
             type="text"
             value={title}
@@ -75,7 +75,9 @@ const FolderModal = ({
           />
         </label>
 
-        {message && <Message text={message} isError={true} />}
+        <div className={styles.messageWrapper}>
+          {message && <Message text={message} isError={true} />}
+        </div>
 
         <div className={styles.actions}>
           <Button title="Cancel" onClick={onClose} variant="secondary" />

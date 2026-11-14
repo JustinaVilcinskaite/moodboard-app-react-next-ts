@@ -1,5 +1,6 @@
 .form {
   margin-top: 1.5rem;
+  font-size: 0.9rem;
 }
 
 .formGroup {
@@ -9,22 +10,24 @@
   margin-bottom: 1.25rem;
 }
 
-.label {
-  font-weight: 500;
-}
-
 .formGroup input[type="text"],
 .formGroup textarea {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #ccc;
-
-  border-radius: 5px;
-
-  /* tryout */
   background-color: transparent;
-  border: 1px solid rgb(126, 126, 126);
-  
+  border-radius: 5px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+  border: 1px solid var(--color-modal-border);
+}
+
+.formGroup input:focus-visible,
+.formGroup textarea:focus-visible {
+  outline: 1px solid rgb(83, 83, 83);
 }
 
 .formGroup textarea {
@@ -44,10 +47,18 @@
   cursor: pointer;
 }
 
+.radioOption input {
+  accent-color: var(--color-modal-border);
+}
+
 .actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 0.75rem;
   margin-top: 1.5rem;
+}
+
+.messageWrapper {
+  min-height: 1rem;
 }

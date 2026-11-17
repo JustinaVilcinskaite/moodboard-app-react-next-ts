@@ -1,0 +1,57 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 1rem var(--page-gutter) 4rem;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+}
+
+.heroContent h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.heroContent p {
+  max-width: 550px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.actions a {
+  padding: 0.7rem 1rem;
+  border: 1px solid #858585;
+  border-radius: 6px;
+  color: inherit;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.actions a:hover {
+  background-color: #f7f7f7;
+}
+
+.preview {
+  width: 100%;
+  max-width: 1200px;
+  align-self: center;
+}
+
+.preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

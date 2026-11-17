@@ -4,6 +4,7 @@ import type { Image } from "@/types/image";
 import FolderActionsMenu from "../FolderActionsMenu/FolderActionsMenu";
 import ImagesWrapper from "../ImagesWrapper/ImagesWrapper";
 import Button from "../Button/Button";
+import plusIcon from "@/assets/plus-icon.svg";
 
 type FolderBlockProps = {
   folder: Folder;
@@ -39,7 +40,9 @@ const FolderBlock = ({
         {isOwner && (
           <div className={styles.actions}>
             <Button
-              icon="+"
+              icon={
+                <img src={plusIcon.src} alt="" className={styles.plusIcon} />
+              }
               onClick={() => onAddImage(folder.id)}
               variant="icon"
             />

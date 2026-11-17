@@ -1,6 +1,7 @@
 import { useEffect, ReactNode } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
+import SpinnerMain from "../SpinnerMain/SpinnerMain";
 
 type ProtectedRouteProps = {
   children: ReactNode;
@@ -17,7 +18,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }, [isLoading, isAuthenticated, router]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <SpinnerMain />;
   }
 
   if (!isAuthenticated) {

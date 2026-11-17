@@ -79,6 +79,12 @@
   margin-top: auto;
 }
 
+.closeIcon {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 @media (max-width: 900px) {
   .panel {
     width: 100%;

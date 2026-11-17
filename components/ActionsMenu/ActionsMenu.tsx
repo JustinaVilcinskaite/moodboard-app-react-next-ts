@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import styles from "./styles.module.css";
 import Button from "../Button/Button";
+import menuDots from "@/assets/menu-dots.svg";
 
 type ActionsMenuProps = {
   isMenuOpen: boolean;
@@ -18,8 +19,7 @@ const ActionsMenu = ({
   return (
     <div className={styles.menuWrapper}>
       <Button
-        // TODO: add an svg icon
-        icon="•••"
+        icon={<img src={menuDots.src} alt="" className={styles.menuIcon} />}
         onClick={onToggleMenu}
         variant="icon"
         ariaLabel={ariaLabel}

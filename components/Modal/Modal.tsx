@@ -20,7 +20,6 @@ const Modal = ({ title, onClose, children }: ModalProps) => {
         <div className={styles.header}>
           <h2>{title}</h2>
           <Button
-            // TODO: add an svg icon
             icon="×"
             onClick={onClose}
             variant="icon"

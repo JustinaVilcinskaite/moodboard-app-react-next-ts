@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import BoardCard from "../BoardCard/BoardCard";
 import { Board, BoardCardVariant } from "@/types/board";
+import SpinnerMain from "../SpinnerMain/SpinnerMain";
 
 type BoardsWrapperProps = {
   boards: Board[];
@@ -25,7 +26,7 @@ const BoardsWrapper = ({
   return (
     <div className={styles.wrapper}>
       {isLoading ? (
-        <p>Loading...</p>
+        <SpinnerMain />
       ) : boards.length ? (
         boards.map((board) => (
           <BoardCard

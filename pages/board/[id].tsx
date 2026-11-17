@@ -16,6 +16,7 @@ import FoldersWrapper from "@/components/FoldersWrapper/FoldersWrapper";
 import FolderModal from "@/components/FolderModal/FolderModal";
 import AddImageModal from "@/components/AddImageModal/AddImageModal";
 import ImageDetailsPanel from "@/components/ImageDetailsPanel/ImageDetailsPanel";
+import SpinnerMain from "@/components/SpinnerMain/SpinnerMain";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -102,7 +103,7 @@ const BoardPage = () => {
   return (
     <PageTemplate>
       {isLoading ? (
-        <p>Loading...</p>
+        <SpinnerMain />
       ) : message ? (
         <div className={styles.pageError}>
           <Message text={message} isError={true} />
@@ -177,4 +178,3 @@ const BoardPage = () => {
 };
 
 export default BoardPage;
-

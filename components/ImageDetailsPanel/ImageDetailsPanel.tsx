@@ -40,7 +40,6 @@ const ImageDetailsPanel = ({
       setMessage(validationError);
       setIsError(true);
       return;
-      
     }
 
     setMessage("");
@@ -65,7 +64,6 @@ const ImageDetailsPanel = ({
       setSubmitting(false);
     }
   };
-  
 
   return (
     <>
@@ -73,14 +71,12 @@ const ImageDetailsPanel = ({
         <div className={styles.header}>
           <h2>Image Details</h2>
           <Button
-            // TODO: add an svg icon
             icon="×"
             onClick={onClose}
             variant="icon"
             ariaLabel="Close image details"
           />
         </div>
-        
 
         <div className={styles.preview}>
           <img src={image.url} alt={image.note || "Moodboard image"} />
@@ -163,5 +159,3 @@ const ImageDetailsPanel = ({
 };
 
 export default ImageDetailsPanel;
-
-

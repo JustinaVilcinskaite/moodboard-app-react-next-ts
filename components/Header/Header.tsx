@@ -2,8 +2,8 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import { useState } from "react";
 import burgerButton from "@/assets/burger-button.svg";
-import moodboardLogo from "@/assets/moodboard-logo.svg";
 import NavBar from "../NavBar/NavBar";
+import AnimatedLogo from "../AnimatedLogo/AnimatedLogo";
 
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -33,11 +33,7 @@ const Header = () => {
       <header className={styles.header}>
         <div className={styles.container}>
           <Link href="/" className={styles.logoTitleWrapper}>
-            <img
-              src={moodboardLogo.src}
-              alt="Moodboard logo"
-              className={styles.logo}
-            />
+            <AnimatedLogo />
             <span className={styles.websiteTitle}>Moodboard</span>
           </Link>
 

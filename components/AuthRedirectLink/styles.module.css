@@ -4,10 +4,10 @@
 }
 
 .linkText {
-  color: #606060;
+  color: var(--color-text-muted);
   transition: color 0.3s ease;
 }
 
 .linkText:hover {
-  color: #0c0c0c;
+  color: var(--color-text);
 }

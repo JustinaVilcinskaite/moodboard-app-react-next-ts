@@ -10,8 +10,6 @@
   margin-bottom: 1.2rem;
 }
 
-
-
 .formGroup input,
 .formGroup select {
   width: 100%;
@@ -25,7 +23,7 @@
 
 .formGroup input:focus-visible,
 .formGroup select:focus-visible {
-  outline: 1px solid rgb(83, 83, 83);
+  outline: 1px solid var(--color-focus);
 }
 
 .formGroup input::placeholder {

@@ -3,9 +3,26 @@
 :root {
   --page-gutter: 2rem;
   --header-height: 5rem;
-  --color-secondary: #bcbbbb;
-  --color-modal-text: #202020;
+
+  /* Background */
+  --color-background: #ffffff;
+
+  /* Text */
+  --color-text: #202020;
+  --color-text-muted: #595959;
+
+  /* Borders */
+  --color-border: #bcbbbb;
+  --color-border-strong: #858585;
   --color-modal-border: #606060;
+
+  /* Focus and hover */
+  --color-focus: #535353;
+  --color-hover: #f7f7f7;
+
+  /* Accent */
+  --color-accent: #a5c6d7;
+  --color-accent-soft: rgba(165, 198, 215, 0.4);
 }
 
 * {
@@ -17,11 +34,12 @@
 body {
   min-width: 400px;
   font-family: "Rubik", Arial;
+  color: var(--color-text);
 }
 
 a {
   text-decoration: none;
-  color: #000;
+  color: var(--color-text);
 }
 
 @media (max-width: 768px) {

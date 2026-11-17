@@ -5,6 +5,6 @@
 
 .emptyState {
   padding: 0.5rem 0;
-  color: #595959;
+  color: var(--color-text-muted);
   font-size: 0.85rem;
 }

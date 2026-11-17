@@ -7,8 +7,6 @@
 
 .title {
   margin-bottom: 2rem;
- font-size: clamp(1.3rem, 1.1rem + 0.5vw, 1.5rem);
+  font-size: clamp(1.3rem, 1.1rem + 0.5vw, 1.5rem);
   padding-inline: var(--page-gutter);
 }
-
-

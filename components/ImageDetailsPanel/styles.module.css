@@ -10,8 +10,8 @@
   gap: 1.5rem;
   padding: 2rem 1.5rem 1.5rem 1.5rem;
 
-  border-left: 1px solid var(--color-secondary);
-  background: #fff;
+  border-left: 1px solid var(--color-border);
+  background-color: var(--color-background);
 
   overflow-y: auto;
   z-index: 20;
@@ -54,7 +54,7 @@
 .section select {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--color-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 5px;
   background-color: transparent;
   font: inherit;
@@ -68,7 +68,7 @@
 
 .section textarea:focus-visible,
 .section select:focus-visible {
-  outline: 1px solid rgb(83, 83, 83);
+  outline: 1px solid var(--color-focus);
 }
 
 .actions {

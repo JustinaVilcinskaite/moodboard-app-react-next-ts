@@ -17,11 +17,11 @@
 }
 
 .nav ul li a:hover {
-  color: #606060;
+  color: var(--color-text-muted);
 }
 
 .nav ul li a.active {
-  color: #606060;
+  color: var(--color-text-muted);
 }
 
 .userMenuWrapper {
@@ -61,8 +61,8 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--color-secondary);
-    background-color: #fff;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-background);
   }
 
   .open {

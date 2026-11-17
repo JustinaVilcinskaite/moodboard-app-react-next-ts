@@ -2,7 +2,7 @@
   width: 45px;
   height: 45px;
   padding: 6px;
-  background: #fff;
+  background-color: var(--color-background);
   mix-blend-mode: darken;
   display: grid;
   filter: blur(2px);
@@ -13,7 +13,7 @@
   content: "";
   grid-area: 1/1;
   animation: l2 4.5s infinite linear;
-  background: #a5c6d7;
+  background-color: var(--color-accent);
 }
 
 .logo::after {

@@ -1,13 +1,15 @@
 /* Base */
 
 .button {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 400;
   padding: 0.7rem 1rem;
   border: 1px solid transparent;
   border-radius: 6px;
 
   background-color: transparent;
   color: inherit;
-  font-size: 0.9rem;
 
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -56,7 +58,11 @@
 /* Icon */
 
 .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
+  border: 0;
   font-size: 1.2rem;
 }
 

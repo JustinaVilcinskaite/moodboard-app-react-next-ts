@@ -25,6 +25,8 @@
 
 .header h2 {
   font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .preview {
@@ -58,7 +60,7 @@
   border-radius: 5px;
   background-color: transparent;
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .section textarea {

@@ -33,7 +33,7 @@
 }
 
 .title {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 400;
 }
 
@@ -43,6 +43,6 @@
 }
 
 .info p {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--color-text-muted);
 }

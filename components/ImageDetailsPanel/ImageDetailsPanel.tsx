@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Image } from "@/types/image";
 import type { Folder } from "@/types/folder";
 import { updateImageById, deleteImageById } from "@/api/image";
@@ -32,6 +32,11 @@ const ImageDetailsPanel = ({
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const currentFolder = folders.find((folder) => folder.id === image.folderId);
+
+
+  useEffect(() => {
+    setFolderId(image.folderId);
+  }, [image.folderId]);
 
   const handleSaveImage = async () => {
     const validationError = validateImageUpdate({ note });

@@ -16,9 +16,15 @@ export const validateSignup = ({
   if (!trimmedName || !trimmedEmail || !password) {
     return "All fields are required.";
   }
+
+  if (trimmedName.length < 2 || trimmedName.length > 50) {
+    return "Name must be between 2 and 50 characters long.";
+  }
+
   if (!emailRegex.test(trimmedEmail)) {
     return "Please enter a valid email.";
   }
+  
   if (!passwordRegex.test(password)) {
     return "Password must be at least 8 characters long and contain at least one number.";
   }

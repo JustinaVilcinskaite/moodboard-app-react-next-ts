@@ -45,6 +45,7 @@ const FolderBlock = ({
               }
               onClick={() => onAddImage(folder.id)}
               variant="icon"
+              ariaLabel="Add image to folder"
             />
 
             {!folder.isDefault && (

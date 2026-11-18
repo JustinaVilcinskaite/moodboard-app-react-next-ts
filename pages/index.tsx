@@ -2,7 +2,7 @@ import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import styles from "@/styles/Home.module.css";
-// TODO:add image
+// TODO: add image
 // import previewImage from "@/assets/preview.png";
 
 const MainPage = () => {

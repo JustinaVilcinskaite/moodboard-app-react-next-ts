@@ -32,7 +32,6 @@
 }
 
 body {
-  min-width: 400px;
   font-family: "DM Sans", Arial, sans-serif;
   color: var(--color-text);
   line-height: 1.4;

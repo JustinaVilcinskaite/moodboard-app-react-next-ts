@@ -1,18 +1,12 @@
 # Moodboard App – Frontend
 
-A React/Next.js frontend for an in-progress full-stack visual research workspace.
+A React/Next.js frontend built with TypeScript for a full-stack visual research workspace.
 
 Moodboard is designed as one focused place for artists, designers, and other visually oriented users to collect image references, organize them into project boards and folders, and move from scattered inspiration toward a clearer creative direction.
 
-## Current Status
+The frontend uses `AuthContext` for global authentication state and includes protected routes. It supports board and folder management, image collection and organization, and public board browsing. The board workspace uses a responsive masonry layout and an image details panel for editing notes and moving images between folders.
 
-The project is currently in active development.
-
-The frontend currently includes authentication pages, `AuthContext` for global authentication state, protected routes, reusable layout/navigation, My Boards and Explore pages, board list/card components, and API integration for authentication and board data.
-
-The board detail workspace, folder/image frontend integration, Create Board modal form, and full visual workspace UI are still planned or in progress.
-
-This frontend is built to work with a separate Node.js/Express backend API.
+The frontend connects to a separate Node.js/Express backend API.
 
 ## Tech Stack
 
@@ -21,64 +15,69 @@ This frontend is built to work with a separate Node.js/Express backend API.
 - TypeScript
 - Axios
 - js-cookie
+- react-responsive-masonry
 - CSS Modules
 - ESLint
 
-## Implemented Frontend Features
+## Features
 
 ### Authentication & Protected Routes
 
 - Login and signup pages connected to the backend authentication API
-- Client-side validation for required fields, email, and password
 - JWT handling with `js-cookie`
-- `AuthContext` for current user state, loading state, derived authentication state, and logout
-- Token validation on app load through the backend current-user endpoint
-- Protected route wrapper that redirects unauthenticated users to the login page
+- `AuthContext` for user and authentication state, session validation on app load, and logout
+- `ProtectedRoute` for the My Boards page (`/boards`), redirecting unauthenticated users to login
 
 ### Pages & Routing
 
-- Protected My Boards page (`/boards`) connected to the authenticated boards endpoint
-- Public Explore page connected to the public boards endpoint
+- Landing page with a main link that changes based on authentication state
+- My Boards page (`/boards`) displaying owned boards with thumbnails, image counts, updated dates, and visibility status
+- Explore page (`/explore`) displaying public boards
+- Dynamic board detail page (`/board/[id]`) with owner editing controls and public read-only access
+- Loading, error, and empty states for board listings
 
-### Board Listings
+### Board & Folder Management
 
-- Reusable board list and card components
-- Board card variants for My Boards and Explore contexts
-- Loading, error, and empty states for board list pages
-- My Boards cards display board title, thumbnail, image count, updated date, and public/private status
-- Explore cards display public board listings
+- Create, edit, and delete boards, including title, description, and public/private visibility settings
+- Create, rename, and delete folders within boards
+- Automatically created default General folder that cannot be renamed or deleted
+- Deleting a folder moves its images to General rather than deleting them
+- Confirmation dialogs for board and folder deletion
+
+### Images & Board Workspace
+
+- Add images by URL to selected folders, including directly from individual folders
+- Display images grouped by folder in a responsive masonry layout with lazy loading
+- Select images to open a details panel, with read-only access for non-owners
+- Owners can edit image notes, move images between folders using a folder selector, and delete images with confirmation
 
 ### Layout, Navigation & UI
 
-- Reusable page template with header, navigation, and footer
-- Navigation adapts based on authentication state
-- Authenticated users can access My Boards and log out
-- Unauthenticated users can access login and signup links
-- Reusable UI components for buttons, messages, and loading states
-- Responsive navigation with burger menu and overlay state
+- Reusable page template with header and footer
+- Authentication-aware navigation with a responsive mobile menu
+- Reusable buttons, action menus, modals, messages, and loading indicators
+- Editing and management controls displayed conditionally based on board ownership
+- Responsive board workspace and image details panel
 
-### API, Types & Utilities
+### API, Types & Validation
 
 - Shared Axios instance using `NEXT_PUBLIC_API_URL`
-- API functions for authentication and board operations
-- TypeScript types for users, boards, and board card variants
-- Utility helpers for relative date formatting and user initials
-- Shared validation helpers for email and password rules
+- API functions for authentication, board, folder, and image operations
+- TypeScript types for users, boards, folders, and images
+- Shared client-side validation helpers for authentication, boards, folders, and images
 
-## Planned Frontend Improvements
+## Screenshots
 
-- Complete the Create Board modal and connect the full board creation flow
-- Build the board detail workspace with owner and public read-only states
-- Add frontend folder and image API integration
-- Build folder and image management UI, including URL-based image creation for the current implementation phase
-- Add image notes and tags UI
-- Add two board viewing modes: a folder-based view showing folders with their images, and an overview view showing all board images together
-- Refine the visual design and responsive workspace UI
-- Improve the landing page and Explore page
-- Add search, filtering, and sorting functionality
-- Add real image upload support once external image storage is integrated
-- Add drag-and-drop interactions for reordering folders and images
-- Longer-term plans include collaboration, private board invitations, personal favorites, and color-based organization
+<!-- add screenshots -->
+
+## Future Improvements
+
+- Add a board overview mode displaying all images together
+- Support image file uploads with external image storage
+- Add drag-and-drop reordering for folders and images
+- Add search, filtering, and sorting for boards
+
+<!-- later adjust the structure because i will add docs with screenshots -->
 
 ## Project Structure
 
@@ -86,9 +85,11 @@ This frontend is built to work with a separate Node.js/Express backend API.
 moodboard-app-react-next-ts/
 ├── api/                    # Axios instance and API request functions
 ├── assets/                 # Icons and visual assets
-├── components/             # Reusable UI and layout components
+├── components/             # Reusable UI, board, folder, and image components
 ├── context/                # Authentication context
 ├── pages/                  # Next.js pages and routes
+│   ├── board/
+│   │   └── [id].tsx        # Board detail page
 │   ├── boards/             # Protected My Boards page
 │   ├── explore/            # Public Explore page
 │   ├── login/
@@ -96,10 +97,12 @@ moodboard-app-react-next-ts/
 │   ├── _app.tsx
 │   ├── _document.tsx
 │   └── index.tsx           # Landing page
-├── styles/                 # Global and modular styles
+├── public/                 # Public assets
+├── styles/                 # Global and landing page styles
 ├── types/                  # TypeScript types
 ├── utils/                  # Helper functions
 ├── validations/            # Frontend validation helpers
+├── eslint.config.mjs
 ├── next.config.ts
 ├── next-env.d.ts
 ├── package.json
@@ -107,11 +110,9 @@ moodboard-app-react-next-ts/
 └── README.md
 ```
 
-## Local Development
+## Getting Started
 
-This repository is currently best reviewed as an in-progress frontend codebase for the Moodboard full-stack project.
-
-The app can be run locally with the setup below. To use API-connected features, run the separate backend API as well.
+To use the API-connected features, run the [separate backend API](https://github.com/JustinaVilcinskaite/moodboard-api-node-express) alongside the frontend.
 
 ### 1. Clone the repository
 
@@ -142,12 +143,6 @@ npm run dev
 
 The frontend will be available at:
 
-```bash
+```text
 http://localhost:3000
 ```
-
-### 5. Related Backend
-
-This frontend connects to a separate Node.js/Express backend API:
-
-[moodboard-api-node-express](https://github.com/JustinaVilcinskaite/moodboard-api-node-express)

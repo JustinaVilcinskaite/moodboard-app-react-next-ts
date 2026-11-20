@@ -2,8 +2,7 @@ import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import styles from "@/styles/Home.module.css";
-// TODO: add image
-// import previewImage from "@/assets/preview.png";
+import previewImage from "@/assets/moodboard-preview.webp";
 
 const MainPage = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -31,10 +30,10 @@ const MainPage = () => {
         </div>
 
         <div className={styles.preview}>
-          {/* <img
+          <img
             src={previewImage.src}
             alt="Preview of the Moodboard application"
-          /> */}
+          />
         </div>
       </section>
     </PageTemplate>

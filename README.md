@@ -102,7 +102,9 @@ The frontend connects to a separate Node.js/Express backend API.
 
 ### Mobile Views
 
-<img src="docs/screenshots/mobile-navigation.webp" alt="Mobile Navigation" width="250"> <img src="docs/screenshots/image-details-panel-mobile-view.webp" alt="Mobile Image Details Panel" width="250">
+<img src="docs/screenshots/mobile-navigation.webp" alt="Mobile Navigation" width="300">
+
+<img src="docs/screenshots/image-details-panel-mobile-view.webp" alt="Mobile Image Details Panel" width="300">
 
 ## Future Improvements
 

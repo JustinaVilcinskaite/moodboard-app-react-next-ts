@@ -68,7 +68,41 @@ The frontend connects to a separate Node.js/Express backend API.
 
 ## Screenshots
 
-<!-- add screenshots -->
+### Landing Page
+
+![Landing Page](docs/screenshots/landing-page.webp)
+
+### My Boards
+
+![My Boards](docs/screenshots/my-boards-page.webp)
+
+### Explore
+
+![Explore](docs/screenshots/explore-page.webp)
+
+### Board Workspace
+
+![Board Workspace](docs/screenshots/board-workspace.webp)
+
+### Image Details Panel
+
+![Image Details Panel](docs/screenshots/image-details-panel.webp)
+
+### Create Board Modal
+
+![Create Board Modal](docs/screenshots/create-board-modal.webp)
+
+### Folder Management
+
+![Folder Management](docs/screenshots/folder-management.webp)
+
+### Delete Folder Confirmation
+
+![Delete Folder Confirmation](docs/screenshots/confirm-delete-modal-folder.webp)
+
+### Mobile Views
+
+<img src="docs/screenshots/mobile-navigation.webp" alt="Mobile Navigation" width="250"> <img src="docs/screenshots/image-details-panel-mobile-view.webp" alt="Mobile Image Details Panel" width="250">
 
 ## Future Improvements
 
@@ -76,8 +110,6 @@ The frontend connects to a separate Node.js/Express backend API.
 - Support image file uploads with external image storage
 - Add drag-and-drop reordering for folders and images
 - Add search, filtering, and sorting for boards
-
-<!-- later adjust the structure because i will add docs with screenshots -->
 
 ## Project Structure
 
@@ -87,6 +119,8 @@ moodboard-app-react-next-ts/
 ├── assets/                 # Icons and visual assets
 ├── components/             # Reusable UI, board, folder, and image components
 ├── context/                # Authentication context
+├── docs/
+│   └── screenshots/        # README screenshots
 ├── pages/                  # Next.js pages and routes
 │   ├── board/
 │   │   └── [id].tsx        # Board detail page

@@ -110,3 +110,9 @@
     padding: 1.5rem;
   }
 }
+
+@media (max-width: 480px) {
+  .actions {
+    justify-content: flex-start;
+  }
+}
